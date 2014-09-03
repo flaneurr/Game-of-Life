@@ -1,3 +1,3 @@
 Game-of-Life
 ============
-kirjoitetaanpa sitten jotakin
+kirjoitetaanpa sitten jotakin, ja vielä jotain lisää
