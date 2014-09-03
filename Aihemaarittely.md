@@ -7,11 +7,11 @@ Game of Life. Toteutetaan ohjelma, joka toteuttaa graafisesti John Conwayn Game 
 Käyttäjä
 
 ####Kaikkien käyttäjien toiminnot:
--Pelin käynnistäminen
--Solun tilan vaihtaminen
--Arvottu alkutilanne
--Ruudun tyhjentäminen
--Säännön vaihtaminen
--ajan pysäyttäminen/uudelleenkäynnistäminen
+- Pelin käynnistäminen
+- Solun tilan vaihtaminen
+- Arvottu alkutilanne
+- Ruudun tyhjentäminen
+- Säännön vaihtaminen
+- Ajan pysäyttäminen/uudelleenkäynnistäminen
 
 
