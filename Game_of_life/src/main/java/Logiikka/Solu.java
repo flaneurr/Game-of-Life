@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Solu {
 
     private int tila; // Solu joko elossa tai kuollut, elossa = 1, kuollut = 0.
-    private ArrayList<Solu> naapurit; // miten naapurien alustus hoidetaan?
+    private ArrayList<Solu> naapurit; 
     private int x;
     private int y;
 
@@ -30,12 +30,24 @@ public class Solu {
         return this.tila;       
     }
     
+    public int getX(){
+        return this.x;
+    }
+    
+    public int getY(){
+        return this.y;
+    }
+    
     public void setTila (int tila){
         this.tila = tila;
     }
     
     public ArrayList<Solu> getNaapurit(){
         return this.naapurit;
+    }
+    
+    public void lisaaNaapuri(Solu naapuri){
+        naapurit.add(naapuri);
     }
     
     public int montakoElavaaNaapuria(){

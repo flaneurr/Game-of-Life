@@ -14,12 +14,12 @@ import java.util.ArrayList;
  */
 public class Saanto {
     
-    private ArrayList<Integer> syntyma; // pitäiskö näiden olla jotain listoja mielummin?
+    private ArrayList<Integer> syntyma;
     private ArrayList<Integer> selviaminen;
     
-    public Saanto (){
-        this.syntyma = new ArrayList<Integer>();
-        this.selviaminen = new ArrayList<Integer>();
+    public Saanto (ArrayList<Integer> syntyma, ArrayList<Integer> selviaminen ){
+        this.syntyma = syntyma; 
+        this.selviaminen = selviaminen;
     }
     
     public int seuraavaTila(int edellinenTila, int naapurienLkm){
@@ -37,8 +37,24 @@ public class Saanto {
         this.syntyma = syntyma;
     }
     
+    public void lisaaSyntyma(int uusi){
+        this.syntyma.add(uusi);
+    }
+    
+    public void lisaaSelviaminen(int uusi){
+        this.selviaminen.add(uusi);
+    }
+    
     public void setSelviaminen (ArrayList<Integer> selviaminen){
         this.selviaminen = selviaminen;
+    }
+    
+    public ArrayList<Integer> getSyntyma(){
+        return this.syntyma;       
+    }
+    
+    public ArrayList<Integer> getSelviytyminen(){
+        return this.selviaminen;
     }
     
 }

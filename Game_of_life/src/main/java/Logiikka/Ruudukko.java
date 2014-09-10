@@ -17,16 +17,23 @@ import java.util.Random;
 public class Ruudukko {
     
     private Solu[][] solut;
+    private Saanto saanto;
     
-    
-    public Ruudukko (){ // todennäköisesti tulee useita konstruktoreja
+    public Ruudukko (){ 
+        ArrayList<Integer> syntyma = new ArrayList<>();
+        syntyma.add(3);
+        ArrayList<Integer> selviaminen = new ArrayList<>();
+        selviaminen.add(2);
+        selviaminen.add(3);
         
-        solut = new Solu[20][20];
+        this.saanto = new Saanto(syntyma, selviaminen);
+        
+        this.solut = new Solu[20][20];
         Random rand = new Random();
  
         for (int i = 0; i < solut.length ; i++){
             for (int j = 0 ; j < solut[i].length ; j++){
-                int tila = rand.nextInt(2); // arvotaan alussa solu joko eläväksi tai kuolleeksi'
+                int tila = rand.nextInt(2); // arvotaan alussa solu joko eläväksi tai kuolleeksi
                 Solu solu = new Solu(i,j,tila);
                 solut[i][j] = solu;
             }
@@ -37,24 +44,80 @@ public class Ruudukko {
         return this.solut[x][y];       
     }
     
-    public void paivitaTilat(){
-        // kutsutaan säännön päivitysmetodia, joka päivittää jokaisen solu tilan kerrallaan - muista aika-askleleet!
+    public void luoSaanto(ArrayList<Integer> syntyma, ArrayList<Integer> selviaminen){
+        this.saanto.setSyntyma(syntyma);
+        this.saanto.setSelviaminen(selviaminen);
+    }
+    
+    public void paivitaRuudukko(){
         Solu[][] edellinenRuudukko = solut.clone();
-        ArrayList<Integer> syntyma = new ArrayList<Integer>();
-        syntyma.add(2);
-        ArrayList<Integer> selviaminen = new ArrayList<Integer>();
-        selviaminen.add(2);
-        selviaminen.add(3);
-        
-        Saanto saanto = new Saanto(syntyma, selviaminen);
         
         for (int i = 0; i < solut.length ; i++){
             for (int j = 0 ; j < solut[i].length ; j++){
-                Solu solu = getSolu(i,j);
-                solu.setTila(saanto.seuraavaTila(solu.getTila(), solu.montakoElavaaNaapuria()));
+               Solu solu = getSolu(i,j);
+               // lasketaan naapurien lkm
+               int elavienNaapurienLkm = elavienNaapurienLkm(edellinenRuudukko, solu);
+               // lasketaan solulle uusi tila
+               solu.setTila(saanto.seuraavaTila(solu.getTila(), elavienNaapurienLkm));
             }
         }
     }
+    
+    public int elavienNaapurienLkm(Solu[][] edellinenRuudukko, Solu solu){
+        int lkm = 0;
+        int x = solu.getX();
+        int y = solu.getY();
+        
+        if (x == 0 && y == 0){
+            lkm =+ edellinenRuudukko[0][edellinenRuudukko[x].length-1].getTila();
+            lkm =+ edellinenRuudukko[edellinenRuudukko.length-1][0].getTila();
+            lkm =+ edellinenRuudukko[x+1][y].getTila();
+            lkm =+ edellinenRuudukko[x][y+1].getTila();
+        } else if (x == 0 && y == edellinenRuudukko[0].length-1){
+            lkm =+ edellinenRuudukko[x][0].getTila();
+            lkm =+ edellinenRuudukko[edellinenRuudukko.length-1][y].getTila();
+            lkm =+ edellinenRuudukko[x+1][y].getTila();
+            lkm =+ edellinenRuudukko[x][y-1].getTila();
+        } else if (x == edellinenRuudukko.length-1 && y == 0){
+            lkm =+ edellinenRuudukko[0][y].getTila();
+            lkm =+ edellinenRuudukko[x][edellinenRuudukko[x].length-1].getTila();
+            lkm =+ edellinenRuudukko[x-1][y].getTila();
+            lkm =+ edellinenRuudukko[x][y+1].getTila();            
+        } else if (x == edellinenRuudukko.length-1 && y == edellinenRuudukko[x].length-1){
+            lkm =+ edellinenRuudukko[x][0].getTila();
+            lkm =+ edellinenRuudukko[0][y].getTila();
+            lkm =+ edellinenRuudukko[x-1][y].getTila();
+            lkm =+ edellinenRuudukko[x][y-1].getTila();
+        } else if (x == 0){
+            lkm =+ edellinenRuudukko[edellinenRuudukko.length-1][y].getTila();
+            lkm =+ edellinenRuudukko[x][y-1].getTila();
+            lkm =+ edellinenRuudukko[x+1][y].getTila();
+            lkm =+ edellinenRuudukko[x][y+1].getTila();
+        } else if (y == 0){
+            lkm =+ edellinenRuudukko[x][edellinenRuudukko[x].length-1].getTila();
+            lkm =+ edellinenRuudukko[x-1][y].getTila();
+            lkm =+ edellinenRuudukko[x+1][y].getTila();
+            lkm =+ edellinenRuudukko[x][y+1].getTila();
+        } else if (x == edellinenRuudukko.length-1){
+            lkm =+ edellinenRuudukko[x][y+1].getTila();
+            lkm =+ edellinenRuudukko[x][y-1].getTila();
+            lkm =+ edellinenRuudukko[x-1][y].getTila();
+            lkm =+ edellinenRuudukko[0][y].getTila();
+        } else if (y == edellinenRuudukko[0].length-1){
+            lkm =+ edellinenRuudukko[x-1][y].getTila();
+            lkm =+ edellinenRuudukko[x][y-1].getTila();
+            lkm =+ edellinenRuudukko[x+1][y].getTila();
+            lkm =+ edellinenRuudukko[x][0].getTila();
+        } else {
+            lkm =+ edellinenRuudukko[x-1][y].getTila();
+            lkm =+ edellinenRuudukko[x][y-1].getTila();
+            lkm =+ edellinenRuudukko[x+1][y].getTila();
+            lkm =+ edellinenRuudukko[x][y+1].getTila();
+        }
+        
+        return lkm;
+    }
+
     
     public void tulostaRuudukko(){
         for (int i = 0; i < solut.length ; i++){
