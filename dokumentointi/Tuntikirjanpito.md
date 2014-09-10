@@ -13,4 +13,4 @@
 1 h. Tein muutaman luokan.
 
 #####10.10.14
-2 h. Koodaus jatkuu. Lisää metodeja tehty.
+4 h. Koodaus jatkuu. Lisää metodeja tehty. Muutama testi tehty.
