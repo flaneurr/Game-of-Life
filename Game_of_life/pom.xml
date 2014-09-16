@@ -46,12 +46,6 @@
                     </targetTests>
                 </configuration>
             </plugin>
-        
-            <plugin>
-                <groupId>org.pitest</groupId>
-                <artifactId>pitest-maven</artifactId>
-                <version>0.30</version>
-            </plugin>
         </plugins>
     </build>
 </project>
