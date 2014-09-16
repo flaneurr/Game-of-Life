@@ -14,3 +14,9 @@
 
 #####10.10.14
 6 h. Koodaus jatkuu. Lisää metodeja tehty. Muutama testi tehty.
+
+#####15.9.14
+1 h. Netbeans valitti "käyttö estetty", dunno. Ruudukon naapurienLkm-metodia laitettu uusiksi.
+
+#####16.9.14
+1 h. Paja. NaapurienLkm-metodin koodailemista.
