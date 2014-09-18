@@ -20,3 +20,6 @@
 
 #####16.9.14
 1 h. Paja. NaapurienLkm-metodin koodailemista.
+
+#####18.9.14
+2 h. Pajassa mietittiin miksei git hub toimi. Illalla tein uuden luokkakaavion.
