@@ -25,4 +25,4 @@
 2 h. Pajassa mietittiin miksei git hub toimi. Illalla tein uuden luokkakaavion.
 
 #####22.9.14
-2 h. Graafisen käyttöliittymän aloitus. Tein Kuviontunnistajaan bfs-metodin loppuun.
+4 h. Graafisen käyttöliittymän aloitus. Tein Kuviontunnistajaan bfs-metodin loppuun.
