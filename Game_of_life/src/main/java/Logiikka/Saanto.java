@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package Logiikka;
 
 import java.util.ArrayList;
 
 /**
- *
+ * Kuvaa Game of Lifessa olevaa joukkoa sääntöjä, jotka määräävät solujen tilan seuraavan kierroksen aikana.
  * @author Kisuli
  */
 public class Saanto {
@@ -21,13 +16,18 @@ public class Saanto {
         this.syntyma = syntyma; 
         this.selviaminen = selviaminen;
     }
-    
-    public int seuraavaTila(int edellinenTila, int naapurienLkm){
-        int seuraavaTila = 0;
-        if (edellinenTila == 1 && selviaminen.contains(naapurienLkm)){
-            seuraavaTila = 1;
-        } else if (edellinenTila == 0 && syntyma.contains(naapurienLkm)){
-            seuraavaTila = 1;
+    /**
+     *  Määrittää solun tilan nykyisellä iteraatiolla Game of Lifessa
+     * @param edellinenTila kertoo mikä solun tila oli edellisellä iteraatiolla
+     * @param naapurienLkm kertoo solun elossa olevien naapurien lukumäärän
+     * @return 
+     */
+    public boolean seuraavaTila(boolean edellinenTila, int naapurienLkm){
+        boolean seuraavaTila = false;
+        if (edellinenTila == true && selviaminen.contains(naapurienLkm)){
+            seuraavaTila = true;
+        } else if (edellinenTila == false && syntyma.contains(naapurienLkm)){
+            seuraavaTila = true;
         }
         return seuraavaTila;
         

@@ -41,8 +41,8 @@ public class SaantoTest {
     @Before
     public void setUp() {
         saanto = new Saanto(new ArrayList<Integer>(),new ArrayList<Integer>());
-        kuollutSolu = new Solu(0,0,0);
-        elavaSolu = new Solu(0,0,1);
+        kuollutSolu = new Solu(0,0,false);
+        elavaSolu = new Solu(0,0,true);
     }
     
     @After
@@ -64,22 +64,22 @@ public class SaantoTest {
     @Test public void seuraavaTilaKuollutEloon(){
         int naapurienLkm = 3;
         saanto.lisaaSyntyma(3);
-        int seuraavaTila = saanto.seuraavaTila(kuollutSolu.getTila(), naapurienLkm);
-        assertEquals(seuraavaTila, 1);
+        boolean seuraavaTila = saanto.seuraavaTila(kuollutSolu.getTila(), naapurienLkm);
+        assertEquals(seuraavaTila, true);
     }
 
     @Test public void seuraavaTilaElavaSelviaa(){
         int naapurienLkm = 3;
         saanto.lisaaSelviaminen(3);
-        int seuraavaTila = saanto.seuraavaTila(elavaSolu.getTila(), naapurienLkm);
-        assertEquals(seuraavaTila, 1);
+        boolean seuraavaTila = saanto.seuraavaTila(elavaSolu.getTila(), naapurienLkm);
+        assertEquals(seuraavaTila, true);
     }
     
     @Test public void seuraavaTilaElavaKuolee(){
         int naapurienLkm = 2;
         saanto.lisaaSelviaminen(3);
-        int seuraavaTila = saanto.seuraavaTila(elavaSolu.getTila(), naapurienLkm);
-        assertEquals(seuraavaTila, 0);
+        boolean seuraavaTila = saanto.seuraavaTila(elavaSolu.getTila(), naapurienLkm);
+        assertEquals(seuraavaTila, false);
     }
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:

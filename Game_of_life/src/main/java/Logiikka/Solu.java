@@ -1,32 +1,39 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Logiikka;
 
+import java.awt.Color;
+import static java.awt.Color.BLACK;
 import java.util.ArrayList;
 
 /**
- *
+ * Game of Lifen solu on joko elossa tai kuollut ja tuntee oman värinsä.
  * @author Kisuli
  */
 public class Solu {
 
-    private int tila; // Solu joko elossa tai kuollut, elossa = 1, kuollut = 0.
-    private ArrayList<Solu> naapurit; 
+    private boolean tila;
     private int x;
     private int y;
+    private Color vari;
 
-    public Solu(int x, int y, int tila) {
+    public Solu(int x, int y, boolean tila) {
         
         this.x = x;
         this.y = y;
         this.tila = tila;
+        this.vari = BLACK;
         
     }
+
+    public void setVari(Color vari){
+        this.vari = vari;
+    }
     
-    public int getTila(){
+    public Color getVari(){
+        return this.vari;
+    }
+    
+    public boolean getTila(){
         return this.tila;       
     }
     
@@ -37,27 +44,8 @@ public class Solu {
     public int getY(){
         return this.y;
     }
-    
-    public void setTila (int tila){
+
+    public void setTila (boolean tila){
         this.tila = tila;
     }
-    
-    public ArrayList<Solu> getNaapurit(){
-        return this.naapurit;
-    }
-    
-    public void lisaaNaapuri(Solu naapuri){
-        naapurit.add(naapuri);
-    }
-    
-    public int montakoElavaaNaapuria(){
-        int elavatNaapurit = 0;
-        for (Solu naapuri : this.naapurit){
-            if (naapuri.getTila() == 1){
-                elavatNaapurit++;
-            }          
-        }
-        return elavatNaapurit;
-    }
-
 }

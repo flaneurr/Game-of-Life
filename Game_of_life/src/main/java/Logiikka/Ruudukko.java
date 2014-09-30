@@ -1,14 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Logiikka;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 /**
+ * Luokka sisältää matriisin soluja ja niiden päivityssäännön, jotka yhdessä
+ * simuloivat Conwayn Game of Lifea.
  *
  * @author Kisuli
  */
@@ -16,8 +13,10 @@ public class Ruudukko {
 
     private Solu[][] solut;
     private Saanto saanto;
+    private int koko;
 
-    public Ruudukko() {
+    public Ruudukko(int koko) {
+        this.koko = koko;
         ArrayList<Integer> syntyma = new ArrayList<>();
         syntyma.add(3);
         ArrayList<Integer> selviaminen = new ArrayList<>();
@@ -26,29 +25,112 @@ public class Ruudukko {
 
         this.saanto = new Saanto(syntyma, selviaminen);
 
-        this.solut = new Solu[20][20];
+        this.solut = new Solu[koko][koko];
         Random rand = new Random();
 
         for (int i = 0; i < solut.length; i++) {
             for (int j = 0; j < solut[i].length; j++) {
-                int tila = rand.nextInt(2); // arvotaan alussa solu joko eläväksi tai kuolleeksi
+                // arvotaan alussa solu joko eläväksi tai kuolleeksi
+                int arpa = rand.nextInt(2);
+                boolean tila = true;
+                if (arpa == 0) {
+                    tila = false;
+                }
                 Solu solu = new Solu(i, j, tila);
                 solut[i][j] = solu;
             }
         }
     }
 
+    // konstruktori, joka luo kaikki solut alussa kuolleiksi
+    public Ruudukko() {
+        ArrayList<Integer> syntyma = new ArrayList<>();
+        syntyma.add(3);
+        ArrayList<Integer> selviaminen = new ArrayList<>();
+        selviaminen.add(2);
+        selviaminen.add(3);
+        this.saanto = new Saanto(syntyma, selviaminen);
+        this.koko = 50;
+        this.solut = new Solu[koko][koko];
+        for (int i = 0; i < solut.length; i++) {
+            for (int j = 0; j < solut[i].length; j++) {
+                Solu solu = new Solu(i, j, false);
+                solut[i][j] = solu;
+            }
+        }
+    }
+
+    public int getKoko() {
+        return this.koko;
+    }
+
     public Solu getSolu(int x, int y) {
         return this.solut[x][y];
     }
 
+    /**
+     * Luo uuden säännön, jonka perusteella määräytyy solujen tilan muutokset
+     *
+     * @param syntyma lista, joka sisältää ne solun naapurien lukumäärät, joilla
+     * kuollut solu herää henkiin
+     * @param selviaminen lista, jossa ne solun naapurien lukumäärät, joilla
+     * elvä solu selviää
+     */
     public void luoSaanto(ArrayList<Integer> syntyma, ArrayList<Integer> selviaminen) {
         this.saanto.setSyntyma(syntyma);
         this.saanto.setSelviaminen(selviaminen);
     }
 
+    /**
+     * Asettaa kaikki ruudukon solu kuolleksi
+     */
+    public void tyhjennaRuudukko() {
+        for (int i = 0; i < this.solut.length; i++) {
+            for (int j = 0; j < this.solut[i].length; j++) {
+                getSolu(i, j).setTila(false);
+            }
+        }
+    }
+
+    public void muutaTiloja() {
+        for (int i = 0; i < this.solut.length; i++) {
+            getSolu(i, 0).setTila(true);
+        }
+    }
+
+    /**
+     * Asettaa ruudukon solut satunnaisiin tiloihin. Solulla on 50 %
+     * todennäköisyys olla elossa.
+     */
+    public void satunnaistaRuudukko() {
+        // tällä hetkellä satunnaistaa ruudukon siten, että noin puolet soluista elossa
+        Random rand = new Random();
+        for (int i = 0; i < this.solut.length; i++) {
+            for (int j = 0; j < this.solut[i].length; j++) {
+                int arpa = rand.nextInt(10);
+                boolean tila = true;
+                if (arpa > 2) {
+                    tila = false;
+                }
+                getSolu(i, j).setTila(tila);
+            }
+        }
+    }
+
+    /**
+     * Solujen tilat päivitetään ruudukon säännön mukaan yhden iteraation
+     * verran.
+     */
     public void paivitaRuudukko() {
-        Solu[][] edellinenRuudukko = solut.clone();
+
+//        Solu[][] edellinenRuudukko = solut.clone();
+        Solu[][] edellinenRuudukko = new Solu[solut.length][solut[0].length];
+        for (int i = 0; i < solut.length; i++) {
+            for (int j = 0; j < solut[i].length; j++) {
+                Solu solu = solut[i][j];
+                edellinenRuudukko[i][j] = new Solu(solu.getX(), solu.getX(), solu.getTila());
+            }
+        }
 
         for (int i = 0; i < solut.length; i++) {
             for (int j = 0; j < solut[i].length; j++) {
@@ -61,68 +143,249 @@ public class Ruudukko {
         }
     }
 
-    public int elavienNaapurienLkm(Solu[][] edellinenRuudukko, Solu solu) {
-        int lkm = 0;
-        int x = solu.getX();
-        int y = solu.getY();
-
-        if (x == 0 && y == 0) {
-            lkm = +edellinenRuudukko[0][edellinenRuudukko[x].length - 1].getTila();
-            lkm = +edellinenRuudukko[edellinenRuudukko.length - 1][0].getTila();
-            lkm = +edellinenRuudukko[x + 1][y].getTila();
-            lkm = +edellinenRuudukko[x][y + 1].getTila();
-        } else if (x == 0 && y == edellinenRuudukko[0].length - 1) {
-            lkm = +edellinenRuudukko[x][0].getTila();
-            lkm = +edellinenRuudukko[edellinenRuudukko.length - 1][y].getTila();
-            lkm = +edellinenRuudukko[x + 1][y].getTila();
-            lkm = +edellinenRuudukko[x][y - 1].getTila();
-        } else if (x == edellinenRuudukko.length - 1 && y == 0) {
-            lkm = +edellinenRuudukko[0][y].getTila();
-            lkm = +edellinenRuudukko[x][edellinenRuudukko[x].length - 1].getTila();
-            lkm = +edellinenRuudukko[x - 1][y].getTila();
-            lkm = +edellinenRuudukko[x][y + 1].getTila();
-        } else if (x == edellinenRuudukko.length - 1 && y == edellinenRuudukko[x].length - 1) {
-            lkm = +edellinenRuudukko[x][0].getTila();
-            lkm = +edellinenRuudukko[0][y].getTila();
-            lkm = +edellinenRuudukko[x - 1][y].getTila();
-            lkm = +edellinenRuudukko[x][y - 1].getTila();
-        } else if (x == 0) {
-            lkm = +edellinenRuudukko[edellinenRuudukko.length - 1][y].getTila();
-            lkm = +edellinenRuudukko[x][y - 1].getTila();
-            lkm = +edellinenRuudukko[x + 1][y].getTila();
-            lkm = +edellinenRuudukko[x][y + 1].getTila();
-        } else if (y == 0) {
-            lkm = +edellinenRuudukko[x][edellinenRuudukko[x].length - 1].getTila();
-            lkm = +edellinenRuudukko[x - 1][y].getTila();
-            lkm = +edellinenRuudukko[x + 1][y].getTila();
-            lkm = +edellinenRuudukko[x][y + 1].getTila();
-        } else if (x == edellinenRuudukko.length - 1) {
-            lkm = +edellinenRuudukko[x][y + 1].getTila();
-            lkm = +edellinenRuudukko[x][y - 1].getTila();
-            lkm = +edellinenRuudukko[x - 1][y].getTila();
-            lkm = +edellinenRuudukko[0][y].getTila();
-        } else if (y == edellinenRuudukko[0].length - 1) {
-            lkm = +edellinenRuudukko[x - 1][y].getTila();
-            lkm = +edellinenRuudukko[x][y - 1].getTila();
-            lkm = +edellinenRuudukko[x + 1][y].getTila();
-            lkm = +edellinenRuudukko[x][0].getTila();
+    /**
+     * Kertoo onko solun yläpuolinen naapuri elossa.
+     *
+     * @param edellinenRuudukko edellisen iteraation ruudukko
+     * @param solu solu, jonka yläpuolista naapuria tarkastellaan
+     * @return palauttaa 1, jos yläpuolinen naapuri on elossa ja 0, jos se on
+     * kuollut
+     */
+    public int ylosElossa(Solu[][] edellinenRuudukko, Solu solu) {
+        int elossa = 0;
+        if (solu.getX() == 0) {
+            if (edellinenRuudukko[edellinenRuudukko.length - 1][solu.getY()].getTila()) {
+                elossa = 1;
+            }
         } else {
-            lkm = +edellinenRuudukko[x - 1][y].getTila();
-            lkm = +edellinenRuudukko[x][y - 1].getTila();
-            lkm = +edellinenRuudukko[x + 1][y].getTila();
-            lkm = +edellinenRuudukko[x][y + 1].getTila();
+            if (edellinenRuudukko[solu.getX() - 1][solu.getY()].getTila()) {
+                elossa = 1;
+            }
         }
+        return elossa;
+    }
 
+    /**
+     * Kertoo onko solun alapuolinen naapuri elossa.
+     *
+     * @param edellinenRuudukko edellisen iteraation ruudukko
+     * @param solu solu, jonka alapuolista naapuria tarkastellaan
+     * @return palauttaa 1, jos alapuolinen naapuri on elossa ja 0, jos se on
+     * kuollut
+     */
+    public int alasElossa(Solu[][] edellinenRuudukko, Solu solu) {
+        int elossa = 0;
+        if (solu.getX() == edellinenRuudukko.length - 1) {
+            if (edellinenRuudukko[0][solu.getY()].getTila()) {
+                elossa = 1;
+            }
+        } else {
+            if (edellinenRuudukko[solu.getX() + 1][solu.getY()].getTila()) {
+                elossa = 1;
+            }
+        }
+        return elossa;
+    }
+
+    /**
+     * Kertoo onko solun oikeanpuolinen naapuri elossa.
+     *
+     * @param edellinenRuudukko edellisen iteraation ruudukko
+     * @param solu solu, jonka oikeanpuolista naapuria tarkastellaan
+     * @return palauttaa 1, jos oikeanpuolinen naapuri on elossa ja 0, jos se on
+     * kuollut
+     */
+    public int oikeaElossa(Solu[][] edellinenRuudukko, Solu solu) {
+        int elossa = 0;
+        if (solu.getY() == edellinenRuudukko[solu.getX()].length - 1) {
+            if (edellinenRuudukko[solu.getX()][0].getTila()) {
+                elossa = 1;
+            }
+        } else {
+            if (edellinenRuudukko[solu.getX()][solu.getY() + 1].getTila()) {
+                elossa = 1;
+            }
+        }
+        return elossa;
+    }
+
+    /**
+     * Kertoo onko solun vasemmanpuolinen naapuri elossa.
+     *
+     * @param edellinenRuudukko edellisen iteraation ruudukko
+     * @param solu solu, jonka vasemmanpuolista naapuria tarkastellaan
+     * @return palauttaa 1, jos vasemmanpuolinen naapuri on elossa ja 0, jos se
+     * on kuollut
+     */
+    public int vasenElossa(Solu[][] edellinenRuudukko, Solu solu) {
+        int elossa = 0;
+        if (solu.getY() == 0) {
+            if (edellinenRuudukko[solu.getX()][edellinenRuudukko[solu.getX()].length - 1].getTila()) {
+                elossa = 1;
+            }
+        } else {
+            if (edellinenRuudukko[solu.getX()][solu.getY() - 1].getTila()) {
+                elossa = 1;
+            }
+        }
+        return elossa;
+    }
+
+    /**
+     * Kertoo onko solun vasemmanpuolinen ylänurkkanaapuri elossa.
+     *
+     * @param edellinenRuudukko edellisen iteraation ruudukko
+     * @param solu solu, jonka vasemmanpuolista ylänurkkanaapuria tarkastellaan
+     * @return palauttaa 1, jos vasemmanpuolinen ylänurkkanaapuri on elossa ja
+     * 0, jos se on kuollut
+     */
+    // toimii
+    public int vasenYlaElossa(Solu[][] edellinenRuudukko, Solu solu) {
+        int elossa = 0;
+        if (solu.getX() == 0 && solu.getY() == 0) {
+            if (edellinenRuudukko[edellinenRuudukko.length - 1][edellinenRuudukko[0].length - 1].getTila()) {
+                elossa = 1;
+            }
+        } else if (solu.getX() == 0) {
+            if (edellinenRuudukko[edellinenRuudukko.length - 1][solu.getY() - 1].getTila()) {
+                elossa = 1;
+            }
+        } else if (solu.getY() == 0) {
+            if (edellinenRuudukko[solu.getX() - 1][edellinenRuudukko[solu.getX()].length - 1].getTila()) {
+                elossa = 1;
+            }
+        } else {
+            if (edellinenRuudukko[solu.getX() - 1][solu.getY() - 1].getTila()) {
+                elossa = 1;
+            }
+        }
+        return elossa;
+    }
+
+    /**
+     * Kertoo onko solun oikeanpuolinen ylänurkkanaapuri elossa.
+     *
+     * @param edellinenRuudukko edellisen iteraation ruudukko
+     * @param solu solu, jonka oikeanpuolista ylänurkkanaapuria tarkastellaan
+     * @return palauttaa 1, jos oikeaanpuolinen ylänurkkanaapuri on elossa ja 0,
+     * jos se on kuollut
+     */
+    // toimii!
+    public int oikeaYlaElossa(Solu[][] edellinenRuudukko, Solu solu) {
+        int elossa = 0;
+        if (solu.getX() == 0 && solu.getY() == edellinenRuudukko[solu.getX()].length - 1) {
+            if (edellinenRuudukko[edellinenRuudukko.length - 1][0].getTila()) {
+                elossa = 1;
+            }
+        } else if (solu.getX() == 0) {
+            if (edellinenRuudukko[edellinenRuudukko.length - 1][solu.getY() + 1].getTila()) {
+                elossa = 1;
+            }
+        } else if (solu.getY() == edellinenRuudukko[solu.getX()].length - 1) {
+            if (edellinenRuudukko[solu.getX() - 1][0].getTila()) {
+                elossa = 1;
+            }
+        } else {
+            if (edellinenRuudukko[solu.getX() - 1][solu.getY() + 1].getTila()) {
+                elossa = 1;
+            }
+        }
+        return elossa;
+    }
+
+    /**
+     * Kertoo onko solun oikeanpuolinen alanurkkanaapuri elossa.
+     *
+     * @param edellinenRuudukko edellisen iteraation ruudukko
+     * @param solu solu, oikeanpuolinen alanurkkanaapuria tarkastellaan
+     * @return palauttaa 1, jos oikeanpuolinen alanurkkanaapuri on elossa ja 0,
+     * jos se on kuollut
+     */
+    // toimii 
+    public int oikeaAlaElossa(Solu[][] edellinenRuudukko, Solu solu) {
+        int elossa = 0;
+        if (solu.getX() == edellinenRuudukko.length - 1 && solu.getY() == edellinenRuudukko[solu.getX()].length - 1) {
+            if (edellinenRuudukko[0][0].getTila()) {
+                elossa = 1;
+            }
+        } else if (solu.getX() == edellinenRuudukko.length - 1) {
+            if (edellinenRuudukko[0][solu.getY() + 1].getTila()) {
+                elossa = 1;
+            }
+        } else if (solu.getY() == edellinenRuudukko[solu.getX()].length - 1) {
+            if (edellinenRuudukko[solu.getX() + 1][0].getTila()) {
+                elossa = 1;
+            }
+        } else {
+            if (edellinenRuudukko[solu.getX() + 1][solu.getY() + 1].getTila()) {
+                elossa = 1;
+            }
+        }
+        return elossa;
+    }
+
+    /**
+     * Kertoo onko solun vasemmanpuolinen alanurkkanaapuri elossa.
+     *
+     * @param edellinenRuudukko edellisen iteraation ruudukko
+     * @param solu solu, vasemmanpuolinen alanurkkanaapuria tarkastellaan
+     * @return palauttaa 1, jos vasemmanpuolinen alanurkkanaapuri on elossa ja
+     * 0, jos se on kuollut
+     */
+    // toimii
+    public int vasenAlaElossa(Solu[][] edellinenRuudukko, Solu solu) {
+        int elossa = 0;
+        if (solu.getX() == edellinenRuudukko.length - 1 && solu.getY() == 0) {
+            if (edellinenRuudukko[0][solut[0].length - 1].getTila()) {
+                elossa = 1;
+            }
+        } else if (solu.getX() == edellinenRuudukko.length - 1) {
+            if (edellinenRuudukko[0][solu.getY() - 1].getTila()) {
+                elossa = 1;
+            }
+        } else if (solu.getY() == 0) {
+            if (edellinenRuudukko[solu.getX() + 1][edellinenRuudukko[solu.getY()].length - 1].getTila()) {
+                elossa = 1;
+            }
+        } else {
+            if (edellinenRuudukko[solu.getX() + 1][solu.getY() - 1].getTila()) {
+                elossa = 1;
+            }
+        }
+        return elossa;
+    }
+
+    /**
+     * Laskee kuinka monta solun kahdeksasta naapurista on elossa.
+     *
+     * @param edellinenRuudukko edellisen iteraation ruudukko
+     * @param solu solu, jonka aapureiden lukumäärää lasketaan
+     * @return
+     */
+    public int elavienNaapurienLkm(Solu[][] edellinenRuudukko, Solu solu) {
+        int lkm = +ylosElossa(edellinenRuudukko, solu) + alasElossa(edellinenRuudukko, solu) + vasenElossa(edellinenRuudukko, solu) + oikeaElossa(edellinenRuudukko, solu)
+                + oikeaAlaElossa(edellinenRuudukko, solu) + vasenAlaElossa(edellinenRuudukko, solu) + oikeaYlaElossa(edellinenRuudukko, solu) + vasenYlaElossa(edellinenRuudukko, solu);
         return lkm;
     }
 
     public void tulostaRuudukko() {
+        int tila;
         for (int i = 0; i < solut.length; i++) {
             for (int j = 0; j < solut[i].length; j++) {
-                System.out.print(Integer.toString(getSolu(i, j).getTila()));
+                if (getSolu(i, j).getTila()) {
+                    tila = 1;
+                } else {
+                    tila = 0;
+                }
+                System.out.print(Integer.toString(tila));
             }
             System.out.println("");
         }
+    }
+
+    // yksinkertainen getteri Kuviontunnistajaa varten
+    public Solu[][] getSolut() {
+        return this.solut;
     }
 
 }
