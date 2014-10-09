@@ -64,10 +64,12 @@ public class KuviontunnistajaTest {
         tunnistaja.kerroVariKuviolle(kuvio, RED);
         assertEquals(kuvio.getVari(), RED);
     }
+    
+    @Test
+    public void kuvioTunnistetaan(){
+        ruudukko.getSolu(0, 1).setTila(true);
+        tunnistaja.etsiKuviot();
+        assertEquals(tunnistaja.getKuviot().size(), 1);
+    }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }

@@ -67,9 +67,4 @@ public class KuvioTest {
         assertEquals(kuvio.getSolut().isEmpty(), false);
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }

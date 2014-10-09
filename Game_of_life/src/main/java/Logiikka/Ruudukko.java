@@ -14,9 +14,13 @@ public class Ruudukko {
     private Solu[][] solut;
     private Saanto saanto;
     private int koko;
+    private ArrayList<Kuvio> kuviot;
+    private Kuviontunnistaja kuviontunnistaja;
 
-    public Ruudukko(int koko) {
-        this.koko = koko;
+    public Ruudukko() {
+        kuviot = new ArrayList<Kuvio>();
+        kuviontunnistaja = new Kuviontunnistaja();
+        this.koko = 50;
         ArrayList<Integer> syntyma = new ArrayList<>();
         syntyma.add(3);
         ArrayList<Integer> selviaminen = new ArrayList<>();
@@ -43,14 +47,16 @@ public class Ruudukko {
     }
 
     // konstruktori, joka luo kaikki solut alussa kuolleiksi
-    public Ruudukko() {
+    public Ruudukko(int koko) {
+        this.koko = koko;
+        kuviot = new ArrayList<>();
+        kuviontunnistaja = new Kuviontunnistaja();
         ArrayList<Integer> syntyma = new ArrayList<>();
         syntyma.add(3);
         ArrayList<Integer> selviaminen = new ArrayList<>();
         selviaminen.add(2);
         selviaminen.add(3);
         this.saanto = new Saanto(syntyma, selviaminen);
-        this.koko = 50;
         this.solut = new Solu[koko][koko];
         for (int i = 0; i < solut.length; i++) {
             for (int j = 0; j < solut[i].length; j++) {
@@ -58,6 +64,10 @@ public class Ruudukko {
                 solut[i][j] = solu;
             }
         }
+    }
+
+    public void paivitaKuviot() {
+        this.kuviot = kuviontunnistaja.etsiKuviot(this.solut);
     }
 
     public int getKoko() {
@@ -123,7 +133,7 @@ public class Ruudukko {
      */
     public void paivitaRuudukko() {
 
-//        Solu[][] edellinenRuudukko = solut.clone();
+        // tehdään kopio edellisestä ruudukosta
         Solu[][] edellinenRuudukko = new Solu[solut.length][solut[0].length];
         for (int i = 0; i < solut.length; i++) {
             for (int j = 0; j < solut[i].length; j++) {
@@ -131,7 +141,7 @@ public class Ruudukko {
                 edellinenRuudukko[i][j] = new Solu(solu.getX(), solu.getX(), solu.getTila());
             }
         }
-
+        // päivitetään ruudukon solujen tilat 
         for (int i = 0; i < solut.length; i++) {
             for (int j = 0; j < solut[i].length; j++) {
                 Solu solu = getSolu(i, j);
@@ -141,6 +151,8 @@ public class Ruudukko {
                 solu.setTila(saanto.seuraavaTila(solu.getTila(), elavienNaapurienLkm));
             }
         }
+        // päivitetään kuviot ja annetaan soluille udet värit.
+        paivitaKuviot(); // <-aiheuttaa onglemia; peliä ei voi pelata eteenpäin kun tätä metodia kutsutaan
     }
 
     /**
@@ -386,6 +398,17 @@ public class Ruudukko {
     // yksinkertainen getteri Kuviontunnistajaa varten
     public Solu[][] getSolut() {
         return this.solut;
+    }
+
+    public boolean kaikkiKuolleita() {
+        for (int i = 0; i < solut.length; i++) {
+            for (int j = 0; j < solut[i].length; j++) {
+                if (solut[i][j].getTila()) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 }

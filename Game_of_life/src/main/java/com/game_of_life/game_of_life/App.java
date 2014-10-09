@@ -2,18 +2,18 @@ package com.game_of_life.game_of_life;
 
 import Kayttoliittyma.Kayttoliittyma;
 import Logiikka.Ruudukko;
-import java.util.ArrayList;
 import javax.swing.SwingUtilities;
 
 /**
- * Hello world!
+ * Main-luokka, josta ohjelma käynnistetään.
  *
  */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        Ruudukko ruudukko = new Ruudukko();
+public class App {
+
+    private static Ruudukko ruudukko;
+
+    public static void main(String[] args) {
+        ruudukko = new Ruudukko(50);
 //        ruudukko.tulostaRuudukko();
 //        
 //        ruudukko.satunnaistaRuudukko();
@@ -39,5 +39,7 @@ public class App
 //        ruudukko.tulostaRuudukko();
         Kayttoliittyma kayttoliittyma = new Kayttoliittyma(ruudukko);
         SwingUtilities.invokeLater(kayttoliittyma);
+
     }
+
 }

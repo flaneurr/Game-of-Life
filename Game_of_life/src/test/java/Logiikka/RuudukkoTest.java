@@ -66,28 +66,28 @@ public class RuudukkoTest {
     @Test
     public void ylosElossaReuna() {
         ruudukko.getSolu(ruudukko.getSolut().length - 1, ruudukko.getSolut()[0].length - 1).setTila(true);
-        int elossa = ruudukko.ylosElossa(ruudukko.getSolu(0, 0));
+        int elossa = ruudukko.ylosElossa(ruudukko.getSolut(),ruudukko.getSolu(0, 0));
         assertEquals(elossa, 1);
     }
 
     @Test
     public void alasElossaReuna() {
         ruudukko.getSolu(0, ruudukko.getSolut()[0].length - 1).setTila(true);
-        int elossa = ruudukko.alasElossa(ruudukko.getSolu(ruudukko.getSolut().length - 1, ruudukko.getSolut()[0].length - 1));
+        int elossa = ruudukko.alasElossa(ruudukko.getSolut(),ruudukko.getSolu(ruudukko.getSolut().length - 1, ruudukko.getSolut()[0].length - 1));
         assertEquals(elossa, 1);
     }
 
     @Test
     public void vasenElossaReuna() {
         ruudukko.getSolu(0, ruudukko.getSolut()[0].length - 1).setTila(true);
-        int elossa = ruudukko.vasenElossa(ruudukko.getSolu(0, 0));
+        int elossa = ruudukko.vasenElossa(ruudukko.getSolut(),ruudukko.getSolu(0, 0));
         assertEquals(elossa, 1);
     }
 
     @Test
     public void oikeaElossaReuna() {
         ruudukko.getSolu(0, ruudukko.getSolut()[0].length - 1).setTila(true);
-        int elossa = ruudukko.oikeaElossa(ruudukko.getSolu(ruudukko.getSolut().length - 1, ruudukko.getSolut()[0].length - 1));
+        int elossa = ruudukko.oikeaElossa(ruudukko.getSolut(),ruudukko.getSolu(ruudukko.getSolut().length - 1, ruudukko.getSolut()[0].length - 1));
         assertEquals(elossa, 1);
     }
 

@@ -13,7 +13,7 @@ public class Kuvio {
     private Color vari;
     
     public Kuvio(Color vari){
-        this.solut = new ArrayList<Solu>();
+        this.solut = new ArrayList<>();
         this.vari = vari;
     }
     
@@ -44,5 +44,9 @@ public class Kuvio {
     
     public Color getVari(){
         return this.vari;
+    }
+    
+    public int getKoko(){
+        return solut.size();
     }
 }
