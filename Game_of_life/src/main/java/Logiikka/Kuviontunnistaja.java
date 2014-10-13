@@ -19,7 +19,7 @@ public class Kuviontunnistaja {
         this.kuviot = new ArrayList<>();
         this.varit = new Color[5];
         varit[0] = new Color(166, 19, 74);
-        varit[1] = new Color(86, 169, 113);
+        varit[1] = new Color(86, 169, 113); 
         varit[2] = new Color(0, 128, 128);
         varit[3] = new Color(163, 73, 164);
         varit[4] = new Color(64, 0, 128);

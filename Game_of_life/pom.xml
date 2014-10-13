@@ -40,11 +40,9 @@
                 <configuration>
                     <targetClasses>
                         <param>Logiikka.*</param>
-                        <param>Kayttoliittyma.*</param>
                     </targetClasses>
                     <targetTests>
                         <param>Logiikka.*</param>
-                        <param>Kayttoliittyma.*</param>
                     </targetTests>
                 </configuration>
             </plugin>
@@ -55,7 +53,6 @@
                     <instrumentation>
                         <includes>
                             <include>Logiikka/*.class</include>
-                            <include>Kayttoliittyma/*.class</include>
                         </includes>
                     </instrumentation>
                 </configuration>

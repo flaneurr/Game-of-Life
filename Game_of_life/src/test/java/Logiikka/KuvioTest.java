@@ -58,7 +58,7 @@ public class KuvioTest {
     public void variVaihtuu(){
         kuvio.setVari(toinenVari);
         kuvio.varitaSolut();
-        assertEquals(kuvio.getSolut().get(0), toinenVari);
+        assertEquals(kuvio.getSolut().get(0).getVari(), toinenVari);
     }
     
     @Test

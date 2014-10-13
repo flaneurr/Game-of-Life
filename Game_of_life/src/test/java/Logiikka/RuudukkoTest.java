@@ -36,7 +36,7 @@ public class RuudukkoTest {
     public void setUp() {
         ruudukko = new Ruudukko(3);
         for (int i = 0; i < ruudukko.getSolut().length; i++) {
-            for(int j = 0; j < ruudukko.getSolut()[i].length; j++){
+            for (int j = 0; j < ruudukko.getSolut()[i].length; j++) {
                 ruudukko.getSolu(i, j).setTila(true);
             }
         }
@@ -47,7 +47,21 @@ public class RuudukkoTest {
     }
     
     @Test
-    public void saannonLuominenOnnistuu(){
+    public void ruudukonTyhjentaminenToimii(){
+        ruudukko.tyhjennaRuudukko();
+        assertEquals(kaikkiKuolleita(ruudukko),true);
+    }
+            
+
+    @Test
+    public void ruudukonSatunniastaminenToimii() {
+        Ruudukko tyhjaRuudukko = new Ruudukko();
+        tyhjaRuudukko.satunnaistaRuudukko();
+        assertEquals(kaikkiKuolleita(tyhjaRuudukko), false);
+    }
+
+    @Test
+    public void saannonLuominenOnnistuu() {
         ArrayList<Integer> selviaminen = new ArrayList<Integer>();
         ArrayList<Integer> syntyma = new ArrayList<Integer>();
         selviaminen.add(8);
@@ -56,7 +70,7 @@ public class RuudukkoTest {
         ruudukko.paivitaRuudukko();
         assertEquals(ruudukko.getSolu(1, 1).getTila(), true);
     }
-    
+
     @Test
     public void elavienNaapurienLkmToimii() {
         int lkm = ruudukko.elavienNaapurienLkm(ruudukko.getSolut(), ruudukko.getSolu(1, 1));
@@ -66,32 +80,44 @@ public class RuudukkoTest {
     @Test
     public void ylosElossaReuna() {
         ruudukko.getSolu(ruudukko.getSolut().length - 1, ruudukko.getSolut()[0].length - 1).setTila(true);
-        int elossa = ruudukko.ylosElossa(ruudukko.getSolut(),ruudukko.getSolu(0, 0));
+        int elossa = ruudukko.ylosElossa(ruudukko.getSolut(), ruudukko.getSolu(0, 0));
         assertEquals(elossa, 1);
     }
 
     @Test
     public void alasElossaReuna() {
         ruudukko.getSolu(0, ruudukko.getSolut()[0].length - 1).setTila(true);
-        int elossa = ruudukko.alasElossa(ruudukko.getSolut(),ruudukko.getSolu(ruudukko.getSolut().length - 1, ruudukko.getSolut()[0].length - 1));
+        int elossa = ruudukko.alasElossa(ruudukko.getSolut(), ruudukko.getSolu(ruudukko.getSolut().length - 1, ruudukko.getSolut()[0].length - 1));
         assertEquals(elossa, 1);
     }
 
     @Test
     public void vasenElossaReuna() {
         ruudukko.getSolu(0, ruudukko.getSolut()[0].length - 1).setTila(true);
-        int elossa = ruudukko.vasenElossa(ruudukko.getSolut(),ruudukko.getSolu(0, 0));
+        int elossa = ruudukko.vasenElossa(ruudukko.getSolut(), ruudukko.getSolu(0, 0));
         assertEquals(elossa, 1);
     }
 
     @Test
     public void oikeaElossaReuna() {
         ruudukko.getSolu(0, ruudukko.getSolut()[0].length - 1).setTila(true);
-        int elossa = ruudukko.oikeaElossa(ruudukko.getSolut(),ruudukko.getSolu(ruudukko.getSolut().length - 1, ruudukko.getSolut()[0].length - 1));
+        int elossa = ruudukko.oikeaElossa(ruudukko.getSolut(), ruudukko.getSolu(ruudukko.getSolut().length - 1, ruudukko.getSolut()[0].length - 1));
         assertEquals(elossa, 1);
     }
-
     
+    // tähän testit kulmille?
+
+
+    public boolean kaikkiKuolleita(Ruudukko ruudukko) {
+        for (int i = 0; i < ruudukko.getSolut().length; i++) {
+            for (int j = 0; j < ruudukko.getSolut()[i].length; j++) {
+                if (ruudukko.getSolut()[i][j].getTila()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:

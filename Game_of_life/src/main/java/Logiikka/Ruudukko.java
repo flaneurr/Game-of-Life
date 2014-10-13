@@ -106,12 +106,6 @@ public class Ruudukko {
         }
     }
 
-    public void muutaTiloja() {
-        for (int i = 0; i < this.solut.length; i++) {
-            getSolu(i, 0).setTila(true);
-        }
-    }
-
     /**
      * Asettaa ruudukon solut satunnaisiin tiloihin. Solulla on 50 %
      * todennäköisyys olla elossa.
@@ -382,21 +376,6 @@ public class Ruudukko {
         int lkm = +ylosElossa(edellinenRuudukko, solu) + alasElossa(edellinenRuudukko, solu) + vasenElossa(edellinenRuudukko, solu) + oikeaElossa(edellinenRuudukko, solu)
                 + oikeaAlaElossa(edellinenRuudukko, solu) + vasenAlaElossa(edellinenRuudukko, solu) + oikeaYlaElossa(edellinenRuudukko, solu) + vasenYlaElossa(edellinenRuudukko, solu);
         return lkm;
-    }
-
-    public void tulostaRuudukko() {
-        int tila;
-        for (int i = 0; i < solut.length; i++) {
-            for (int j = 0; j < solut[i].length; j++) {
-                if (getSolu(i, j).getTila()) {
-                    tila = 1;
-                } else {
-                    tila = 0;
-                }
-                System.out.print(Integer.toString(tila));
-            }
-            System.out.println("");
-        }
     }
 
     // yksinkertainen getteri Kuviontunnistajaa varten
