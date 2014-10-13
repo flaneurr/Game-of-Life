@@ -21,11 +21,18 @@ public class Kuvio {
         this.solut = solut;
         this.vari = vari;
     }
-    
+    /**
+     * Asettaa kuviolle värin.
+     * @param vari 
+     */
     public void setVari(Color vari){
         this.vari = vari;
     }
-    
+    /**
+     * Lisää solun kuvioon.
+     * 
+     * @param solu lisättävä solu
+     */
     public void lisaaSolu(Solu solu){
         this.solut.add(solu);
     }
@@ -37,15 +44,25 @@ public class Kuvio {
             solu.setVari(this.vari);
         }
     }
-    
+    /**
+     * Palauttaa listan kuvioon kuuluvista soluista.
+     * @return lista kuvioon kuuluvista soluista
+     */
     public ArrayList<Solu> getSolut(){
         return this.solut;
     }
-    
+    /**
+     * Palauttaa kuvion värin.
+     * 
+     * @return kuvion väri
+     */
     public Color getVari(){
         return this.vari;
     }
-    
+    /**
+     * Palauttaa kuvioon kuuluvien solujen lukumäärän.
+     * @return kuvioon kuuluvien solujen lukumäärä
+     */
     public int getKoko(){
         return solut.size();
     }

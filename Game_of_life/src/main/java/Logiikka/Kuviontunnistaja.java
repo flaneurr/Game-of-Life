@@ -25,10 +25,21 @@ public class Kuviontunnistaja {
         varit[4] = new Color(64, 0, 128);
     }
 
+    /**
+     * Asettaa kuviolle uuden värin.
+     * 
+     * @param kuvio kuvio, jolle kerrotaan vari
+     * @param vari vari, joka välitetään kuviolle
+     */
     public void kerroVariKuviolle(Kuvio kuvio, Color vari) {
         kuvio.setVari(vari);
     }
 
+    /**
+     * Lisää kuviontunnistajalle uuden kuvion listaan.
+     * 
+     * @param kuvio lisättävä kuvio
+     */
     public void lisaaKuvio(Kuvio kuvio) {
         this.kuviot.add(kuvio);
     }
@@ -38,7 +49,7 @@ public class Kuviontunnistaja {
      * ne eri väreillä. Tässä samaan kuvioon kuuluu kaksi solua, jotka ovat
      * toistensa horisontaalisia tai vertikaalisia naapureita (diagonaalilla
      * olevat naapurit ovat siis eri kuviota, elleivät liity toisiinsa toisen
-     * solun kautta). Metodi tekee elävien solmujen kohdalla leveyssuuntaisen
+     * solun kautta). Metodi tekee elävien solujen kohdalla leveyssuuntaisen
      * haun elävien naapurien etsimiseksi.
      *
      * @param solut ruudukon solut sisältävä matriisi
@@ -67,6 +78,13 @@ public class Kuviontunnistaja {
         return this.kuviot;
     }
 
+    /**
+     * Metodi antaa kuviolle värin sen koon mukaan. Eri värit annetaan kuviolle,
+     * joiden koko on 1, 2, 3 tai 4, 5 ja viittä suurempi.
+     * 
+     * @param kuvio kuvio, jonka väri halutaan
+     * @return vari kuvio koon mukaan
+     */
     public Color variKuvionKoonMukaan(Kuvio kuvio) {
         if (kuvio.getKoko() < 2) {
             return this.varit[0];
@@ -124,6 +142,11 @@ public class Kuviontunnistaja {
         }
     }
 
+    /**
+     * Palauttaa listan kuviosta.
+     * 
+     * @return lista kuvioista
+     */
     public ArrayList<Kuvio> getKuviot() {
         return this.kuviot;
     }

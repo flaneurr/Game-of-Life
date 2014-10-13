@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Luokka sisältää matriisin soluja ja niiden päivityssäännön, jotka yhdessä
- * simuloivat Conwayn Game of Lifea.
+ * Game of Lifen soluista koostuva ruudukko, jonka solut muuttavat tilaansa
+ * jokaisella aika-askeleella.
  *
  * @author Kisuli
  */
@@ -17,6 +17,10 @@ public class Ruudukko {
     private ArrayList<Kuvio> kuviot;
     private Kuviontunnistaja kuviontunnistaja;
 
+    /**
+     * Konstruktori, joka alustaa solut satunnaisesti joko eläväksi tai
+     * kuolleeksi. Ruudukon koko on 50 pikseliä.
+     */
     public Ruudukko() {
         kuviot = new ArrayList<Kuvio>();
         kuviontunnistaja = new Kuviontunnistaja();
@@ -46,7 +50,11 @@ public class Ruudukko {
         }
     }
 
-    // konstruktori, joka luo kaikki solut alussa kuolleiksi
+    /**
+     * Konstruktori, joka alustaa kaikki solut kuolleiksi.
+     *
+     * @param koko ruudukon koko
+     */
     public Ruudukko(int koko) {
         this.koko = koko;
         kuviot = new ArrayList<>();
@@ -66,15 +74,20 @@ public class Ruudukko {
         }
     }
 
+    /**
+     * Päivittää solujen muodostamat kuviot ruudukolla.
+     */
     public void paivitaKuviot() {
         this.kuviot = kuviontunnistaja.etsiKuviot(this.solut);
     }
-
+    /**
+     * 
+     */
     public int getKoko() {
         return this.koko;
     }
-    
-    public Saanto getSaanto(){
+
+    public Saanto getSaanto() {
         return this.saanto;
     }
 
