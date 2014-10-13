@@ -6,7 +6,8 @@ import static java.awt.Color.BLACK;
 import java.util.ArrayList;
 
 /**
- * Game of Lifen solu on joko elossa tai kuollut ja tuntee oman värinsä.
+ * Game of Lifen solu. On joko elossa tai kuollut ja tuntee oman värinsä.
+ * 
  * @author Kisuli
  */
 public class Solu {

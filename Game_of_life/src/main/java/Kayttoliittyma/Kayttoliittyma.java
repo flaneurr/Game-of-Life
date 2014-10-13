@@ -2,25 +2,21 @@ package Kayttoliittyma;
 
 import Logiikka.Ruudukko;
 import Logiikka.Solu;
-import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.BoxLayout;
+import java.awt.Insets;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
-import javax.swing.plaf.basic.BasicBorders;
 
 public class Kayttoliittyma implements Runnable {
 
@@ -46,7 +42,7 @@ public class Kayttoliittyma implements Runnable {
         // asettaa otsikon
         frame = new JFrame("Game of Life");
         // ikkunan koko
-        frame.setPreferredSize(new Dimension(700, 500));
+        frame.setPreferredSize(new Dimension(1000, 600)); // 780,530
         // kun painaa raksia, ohjelma sulkeutuu
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         // kutsutaan metodia, joka luo kaikki sälät ikkunaan
@@ -57,10 +53,136 @@ public class Kayttoliittyma implements Runnable {
     }
 
     public void luoKomponentit(Container container) {
-//        container.setLayout(new GridBagLayout()); 
-//        this.ruudukonNapit = luoRuudukko();
-        container.add(luoValikko(), BorderLayout.SOUTH);
-        container.add(luoRuudukko(), BorderLayout.CENTER);
+        //        this.ruudukonNapit = luoRuudukko();
+//        container.add(luoValikko(), BorderLayout.SOUTH);
+//        container.add(luoRuudukko(), BorderLayout.CENTER); 
+        GridBagLayout gridLayout = new GridBagLayout();
+        container.setLayout(gridLayout);
+
+        JPanel valikkoPaneeli = luoValikko();
+        GridBagConstraints c = new GridBagConstraints();
+        c.anchor = GridBagConstraints.LINE_START;
+        c.fill = GridBagConstraints.VERTICAL;
+        c.insets = new Insets(20, 20, 20, 20);
+        c.ipadx = 50;
+        c.gridx = 1;
+        c.gridy = 0;
+        container.add(valikkoPaneeli);
+
+//        gridLayout.setConstraints(valikkoPaneeli, c);        
+        JPanel ruudukkoPaneeli = luoRuudukko();
+        GridBagConstraints d = new GridBagConstraints();
+        d.anchor = GridBagConstraints.CENTER;
+        d.insets = new Insets(20, 20, 20, 20);
+        d.fill = GridBagConstraints.BOTH;
+        d.ipadx = 50;
+        container.add(ruudukkoPaneeli);
+        gridLayout.setConstraints(ruudukkoPaneeli, c);
+        
+        JPanel saantoPaneeli = luoSaantoValikko();
+        GridBagConstraints e = new GridBagConstraints();
+        e.gridy = 0;
+        e.gridx = 2;
+        e.insets = new Insets(20, 20, 20, 20);
+        gridLayout.setConstraints(saantoPaneeli, e);
+        container.add(saantoPaneeli);
+
+    }
+
+    private JPanel luoSaantoValikko() {
+        JPanel panel = new JPanel();
+        GridLayout layout = new GridLayout(9, 2);
+        layout.setVgap(5);
+        layout.setHgap(10);
+        panel.setLayout(layout);
+        //tekstit
+        JTextArea syntymat = new JTextArea("Solu syntyy");
+        syntymat.setBackground(null);
+        JTextArea selviamiset = new JTextArea("Solu selviää");
+        selviamiset.setBackground(null);
+        //napit
+        JCheckBox syntymaNappi1 = new JCheckBox("1");
+        JCheckBox syntymaNappi2 = new JCheckBox("2");
+        JCheckBox syntymaNappi3 = new JCheckBox("3",true);
+        JCheckBox syntymaNappi4 = new JCheckBox("4");
+        JCheckBox syntymaNappi5 = new JCheckBox("5");
+        JCheckBox syntymaNappi6 = new JCheckBox("6");
+        JCheckBox syntymaNappi7 = new JCheckBox("7");
+        JCheckBox syntymaNappi8 = new JCheckBox("8");
+
+        JCheckBox selviamisNappi1 = new JCheckBox("1");
+        JCheckBox selviamisNappi2 = new JCheckBox("2",true);
+        JCheckBox selviamisNappi3 = new JCheckBox("3",true);
+        JCheckBox selviamisNappi4 = new JCheckBox("4");
+        JCheckBox selviamisNappi5 = new JCheckBox("5");
+        JCheckBox selviamisNappi6 = new JCheckBox("6");
+        JCheckBox selviamisNappi7 = new JCheckBox("7");
+        JCheckBox selviamisNappi8 = new JCheckBox("8");
+        
+        SyntymaNapinKuuntelija syntKuuntelija1 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(),1);
+        SyntymaNapinKuuntelija syntKuuntelija2 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(),2);
+        SyntymaNapinKuuntelija syntKuuntelija3 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(),3);
+        SyntymaNapinKuuntelija syntKuuntelija4 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(),4);
+        SyntymaNapinKuuntelija syntKuuntelija5 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(),5);
+        SyntymaNapinKuuntelija syntKuuntelija6 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(),6);
+        SyntymaNapinKuuntelija syntKuuntelija7 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(),7);
+        SyntymaNapinKuuntelija syntKuuntelija8 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(),8);
+        
+        syntymaNappi1.addItemListener(syntKuuntelija1);
+        syntymaNappi2.addItemListener(syntKuuntelija2);
+        syntymaNappi3.addItemListener(syntKuuntelija3);
+        syntymaNappi4.addItemListener(syntKuuntelija4);
+        syntymaNappi5.addItemListener(syntKuuntelija5);
+        syntymaNappi6.addItemListener(syntKuuntelija6);
+        syntymaNappi7.addItemListener(syntKuuntelija7);
+        syntymaNappi8.addItemListener(syntKuuntelija8);
+        
+        SelviamisNapinKuuntelija selvKuuntelija1 = new SelviamisNapinKuuntelija(this.ruudukko.getSaanto(),1);
+        SelviamisNapinKuuntelija selvKuuntelija2 = new SelviamisNapinKuuntelija(this.ruudukko.getSaanto(),2);
+        SelviamisNapinKuuntelija selvKuuntelija3 = new SelviamisNapinKuuntelija(this.ruudukko.getSaanto(),3);
+        SelviamisNapinKuuntelija selvKuuntelija4 = new SelviamisNapinKuuntelija(this.ruudukko.getSaanto(),4);
+        SelviamisNapinKuuntelija selvKuuntelija5 = new SelviamisNapinKuuntelija(this.ruudukko.getSaanto(),5);
+        SelviamisNapinKuuntelija selvKuuntelija6 = new SelviamisNapinKuuntelija(this.ruudukko.getSaanto(),6);
+        SelviamisNapinKuuntelija selvKuuntelija7 = new SelviamisNapinKuuntelija(this.ruudukko.getSaanto(),7);
+        SelviamisNapinKuuntelija selvKuuntelija8 = new SelviamisNapinKuuntelija(this.ruudukko.getSaanto(),8);
+        
+        selviamisNappi1.addItemListener(selvKuuntelija1);
+        selviamisNappi2.addItemListener(selvKuuntelija2);
+        selviamisNappi3.addItemListener(selvKuuntelija3);
+        selviamisNappi4.addItemListener(selvKuuntelija4);
+        selviamisNappi5.addItemListener(selvKuuntelija5);
+        selviamisNappi6.addItemListener(selvKuuntelija6);
+        selviamisNappi7.addItemListener(selvKuuntelija7);
+        selviamisNappi8.addItemListener(selvKuuntelija8);
+
+        panel.add(syntymat);
+        panel.add(selviamiset);
+        
+        panel.add(syntymaNappi1);
+        panel.add(selviamisNappi1);
+        
+        panel.add(syntymaNappi2);
+        panel.add(selviamisNappi2);
+        
+        panel.add(syntymaNappi3);
+        panel.add(selviamisNappi3);
+        
+        panel.add(syntymaNappi4);
+        panel.add(selviamisNappi4);
+        
+        panel.add(syntymaNappi5);
+        panel.add(selviamisNappi5);
+        
+        panel.add(syntymaNappi6);
+        panel.add(selviamisNappi6);
+        
+        panel.add(syntymaNappi7);
+        panel.add(selviamisNappi7);
+        
+        panel.add(syntymaNappi8);
+        panel.add(selviamisNappi8);
+
+        return panel;
 
     }
 
@@ -96,36 +218,53 @@ public class Kayttoliittyma implements Runnable {
     }
 
     /**
-     * Luo valikon, jossa JButtonit pelin käyttämiseen.
+     * Luo valikon, joka sisältää JButtonit pelin käyttämiseen.
      *
      * @return palauttaa luodun valikon
      */
     private JPanel luoValikko() {
+        /*
+         * Luodaan paneeli ja sille layout.
+         */
         JPanel panel = new JPanel();
-        BoxLayout layout = new BoxLayout(panel, BoxLayout.X_AXIS);
+        GridLayout layout = new GridLayout(6, 1);
+        layout.setVgap(15);
         panel.setLayout(layout);
-
+        /*
+         * Luodaan napit.
+         */
         JButton randomNappi = new JButton("Satunnainen alkutilanne");
         JButton tyhjennysNappi = new JButton("Tyhjennä ruudukko");
         JButton aloitusNappi = new JButton("Aloita peli");
         JButton lopetusNappi = new JButton("Lopeta peli");
         JButton askelNappi = new JButton("Askel eteenpäin");
-        // lisätään vielä radio button, josta valitaan käytetäänkö varejä vai ei
         JRadioButton variNappi = new JRadioButton("Värit päällä/pois", true);
-
-        panel.add(randomNappi);
-        panel.add(tyhjennysNappi);
+        /*
+         * Keskitetään napit tekstin suhteen.
+         */
+//        float alignment = (float) 0.5;
+//        variNappi.setAlignmentX(alignment);
+//        tyhjennysNappi.setAlignmentX(alignment);
+//        aloitusNappi.setAlignmentX(alignment);
+//        lopetusNappi.setAlignmentX(alignment);
+//        askelNappi.setAlignmentX(alignment);
+//        randomNappi.setAlignmentX(alignment);
+        /*
+         * Lisätään napit paneeliin.
+         */
         panel.add(aloitusNappi);
         panel.add(lopetusNappi);
         panel.add(askelNappi);
-        // varinappi paneliin
+        panel.add(randomNappi);
+        panel.add(tyhjennysNappi);
         panel.add(variNappi);
-
+        /*
+         * Luodaan ja lisätään napeille action listenerit.
+         */
         AloitusNapinKuuntelija aloitusKuuntelija = new AloitusNapinKuuntelija(ruudukko, this);
         LopetusNapinKuuntelija lopetusKuuntelija = new LopetusNapinKuuntelija(ruudukko, this);
         RandomNapinKuuntelija randomKuuntelija = new RandomNapinKuuntelija(ruudukko, this);
         TyhjennysNapinKuuntelija tyhjennysKuuntelija = new TyhjennysNapinKuuntelija(ruudukko, this);
-        // varinapille kuuntelija
         VariNapinKuuntelija variKuuntelija = new VariNapinKuuntelija(this);
 
         randomNappi.addActionListener(randomKuuntelija);
@@ -133,7 +272,6 @@ public class Kayttoliittyma implements Runnable {
         aloitusNappi.addActionListener(aloitusKuuntelija);
         lopetusNappi.addActionListener(lopetusKuuntelija);
         askelNappi.addActionListener(askelKuuntelija);
-        // lisataan vielä varinapille kuuntelija
         variNappi.addActionListener(variKuuntelija);
 
         return panel;

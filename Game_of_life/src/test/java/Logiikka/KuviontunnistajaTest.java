@@ -46,7 +46,7 @@ public class KuviontunnistajaTest {
         solut.add(solu);
         kuvio = new Kuvio(BLACK,solut);
         ruudukko = new Ruudukko(20);
-        tunnistaja = new Kuviontunnistaja(ruudukko);
+        tunnistaja = new Kuviontunnistaja();
     }
     
     @After
@@ -68,7 +68,7 @@ public class KuviontunnistajaTest {
     @Test
     public void kuvioTunnistetaan(){
         ruudukko.getSolu(0, 1).setTila(true);
-        tunnistaja.etsiKuviot();
+        tunnistaja.etsiKuviot(ruudukko.getSolut());
         assertEquals(tunnistaja.getKuviot().size(), 1);
     }
 

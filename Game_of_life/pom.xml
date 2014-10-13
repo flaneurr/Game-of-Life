@@ -54,8 +54,8 @@
                 <configuration>
                     <instrumentation>
                         <includes>
-                            <include>ristinolla.logiikka/*.class</include>
-                            <include>ristinolla.tekoaly/*.class</include>
+                            <include>Logiikka/*.class</include>
+                            <include>Kayttoliittyma/*.class</include>
                         </includes>
                     </instrumentation>
                 </configuration>

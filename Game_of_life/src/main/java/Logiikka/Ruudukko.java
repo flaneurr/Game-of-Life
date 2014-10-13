@@ -73,6 +73,10 @@ public class Ruudukko {
     public int getKoko() {
         return this.koko;
     }
+    
+    public Saanto getSaanto(){
+        return this.saanto;
+    }
 
     public Solu getSolu(int x, int y) {
         return this.solut[x][y];

@@ -57,4 +57,25 @@ public class Saanto {
         return this.selviaminen;
     }
     
+    public void poistaSyntyma(int synt){
+        if(this.syntyma.contains(synt)){            
+            for (int i = 0; i < syntyma.size(); i++){
+                if (syntyma.get(i) == synt){
+                    syntyma.remove(i);
+                }
+            }
+        }
+    }
+    
+    public void poistaSelviaminen(int selv){
+        if(this.selviaminen.contains(selv)){{
+                for (int i = 0; i < selviaminen.size(); i++){
+                if (selviaminen.get(i) == selv){
+                    selviaminen.remove(i);
+                }
+            }
+            }
+        }
+    }
+    
 }

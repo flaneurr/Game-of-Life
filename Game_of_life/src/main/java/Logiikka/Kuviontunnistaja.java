@@ -18,12 +18,11 @@ public class Kuviontunnistaja {
     public Kuviontunnistaja() {
         this.kuviot = new ArrayList<>();
         this.varit = new Color[5];
-        varit[0] = Color.CYAN;
-        varit[1] = Color.BLUE;
-        varit[2] = Color.GREEN;
-        varit[3] = Color.ORANGE;
-        varit[4] = Color.MAGENTA;
-        // new Color(int rgb);
+        varit[0] = new Color(166, 19, 74);
+        varit[1] = new Color(86, 169, 113);
+        varit[2] = new Color(0, 128, 128);
+        varit[3] = new Color(163, 73, 164);
+        varit[4] = new Color(64, 0, 128);
     }
 
     public void kerroVariKuviolle(Kuvio kuvio, Color vari) {
@@ -46,7 +45,6 @@ public class Kuviontunnistaja {
      * @return palauttaa listan löydetyistä kuvioista
      */
     public ArrayList<Kuvio> etsiKuviot(Solu[][] solut) {
-        int mikaVari = 0;
         ArrayList<Solu> kaytetyt = new ArrayList<>();
         for (int i = 0; i < solut.length; i++) {
             for (int j = 0; j < solut[i].length; j++) {
@@ -74,7 +72,7 @@ public class Kuviontunnistaja {
             return this.varit[0];
         } else if (kuvio.getKoko() < 3) {
             return this.varit[1];
-        } else if (kuvio.getKoko() < 4) {
+        } else if (kuvio.getKoko() < 5) {
             return this.varit[2];
         } else if (kuvio.getKoko() < 6) {
             return this.varit[3];
