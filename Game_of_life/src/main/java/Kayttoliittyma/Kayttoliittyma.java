@@ -42,7 +42,7 @@ public class Kayttoliittyma implements Runnable {
         // asettaa otsikon
         frame = new JFrame("Game of Life");
         // ikkunan koko
-        frame.setPreferredSize(new Dimension(1000, 600)); // 780,530
+        frame.setPreferredSize(new Dimension(1050, 600)); // 780,530
         // kun painaa raksia, ohjelma sulkeutuu
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         // kutsutaan metodia, joka luo kaikki sälät ikkunaan
@@ -53,12 +53,9 @@ public class Kayttoliittyma implements Runnable {
     }
 
     public void luoKomponentit(Container container) {
-        //        this.ruudukonNapit = luoRuudukko();
-//        container.add(luoValikko(), BorderLayout.SOUTH);
-//        container.add(luoRuudukko(), BorderLayout.CENTER); 
         GridBagLayout gridLayout = new GridBagLayout();
         container.setLayout(gridLayout);
-
+        // luodaan valikko pelin hallitsemiseksi
         JPanel valikkoPaneeli = luoValikko();
         GridBagConstraints c = new GridBagConstraints();
         c.anchor = GridBagConstraints.LINE_START;
@@ -68,8 +65,9 @@ public class Kayttoliittyma implements Runnable {
         c.gridx = 1;
         c.gridy = 0;
         container.add(valikkoPaneeli);
-
-//        gridLayout.setConstraints(valikkoPaneeli, c);        
+        //gridLayout.setConstraints(valikkoPaneeli, c);       
+        
+        // luodaan ruudukko soluja
         JPanel ruudukkoPaneeli = luoRuudukko();
         GridBagConstraints d = new GridBagConstraints();
         d.anchor = GridBagConstraints.CENTER;
@@ -79,6 +77,7 @@ public class Kayttoliittyma implements Runnable {
         container.add(ruudukkoPaneeli);
         gridLayout.setConstraints(ruudukkoPaneeli, c);
         
+        // luodaan valikko, josta voidaan muokata sääntöjä
         JPanel saantoPaneeli = luoSaantoValikko();
         GridBagConstraints e = new GridBagConstraints();
         e.gridy = 0;
@@ -119,6 +118,7 @@ public class Kayttoliittyma implements Runnable {
         JCheckBox selviamisNappi7 = new JCheckBox("7");
         JCheckBox selviamisNappi8 = new JCheckBox("8");
         
+        // action listenerit
         SyntymaNapinKuuntelija syntKuuntelija1 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(),1);
         SyntymaNapinKuuntelija syntKuuntelija2 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(),2);
         SyntymaNapinKuuntelija syntKuuntelija3 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(),3);
@@ -155,6 +155,7 @@ public class Kayttoliittyma implements Runnable {
         selviamisNappi7.addItemListener(selvKuuntelija7);
         selviamisNappi8.addItemListener(selvKuuntelija8);
 
+        // lisätään napit paneeliin
         panel.add(syntymat);
         panel.add(selviamiset);
         
@@ -195,16 +196,13 @@ public class Kayttoliittyma implements Runnable {
         GridLayout layout = new GridLayout(ruudukko.getKoko(), ruudukko.getKoko());
         JPanel panel = new JPanel();
         panel.setLayout(layout);
-
-//        RuudukonKuuntelija ruudukonKuuntelija = new RuudukonKuuntelija(this.ruudukko);
         for (int i = 0; i < ruudukko.getKoko(); i++) {
             for (int j = 0; j < ruudukko.getKoko(); j++) {
                 SoluNappi nappi = new SoluNappi(ruudukko.getSolu(i, j));
                 ruudukonNapit[i][j] = nappi;
                 SolunKuuntelija solunKuuntelija = new SolunKuuntelija(nappi, ruudukko.getSolu(i, j));
-//                 tehdään napeista enemmän neliön mallisia
+                //tehdään napeista enemmän neliön mallisia
                 nappi.setPreferredSize(new Dimension(10, 10));
-//                nappi.setSize(10, 10);
                 nappi.setMinimumSize(new Dimension(10, 10));
                 nappi.setMaximumSize(new Dimension(10, 10));
                 panel.add(nappi);
@@ -239,16 +237,6 @@ public class Kayttoliittyma implements Runnable {
         JButton lopetusNappi = new JButton("Lopeta peli");
         JButton askelNappi = new JButton("Askel eteenpäin");
         JRadioButton variNappi = new JRadioButton("Värit päällä/pois", true);
-        /*
-         * Keskitetään napit tekstin suhteen.
-         */
-//        float alignment = (float) 0.5;
-//        variNappi.setAlignmentX(alignment);
-//        tyhjennysNappi.setAlignmentX(alignment);
-//        aloitusNappi.setAlignmentX(alignment);
-//        lopetusNappi.setAlignmentX(alignment);
-//        askelNappi.setAlignmentX(alignment);
-//        randomNappi.setAlignmentX(alignment);
         /*
          * Lisätään napit paneeliin.
          */
@@ -302,19 +290,6 @@ public class Kayttoliittyma implements Runnable {
     /**
      * Asettaa jokaiselle solulle sille kuuluvan värin tällä iteraatiolla.
      */
-    public void piirraRuudukkoIlmanVareja() {
-        for (int i = 0; i < ruudukko.getKoko(); i++) {
-            for (int j = 0; j < ruudukko.getKoko(); j++) {
-                boolean tila = ruudukko.getSolu(i, j).getTila();
-                if (tila) {
-                    ruudukonNapit[i][j].setBackground(Color.black);
-                } else {
-                    ruudukonNapit[i][j].setBackground(Color.white);
-                }
-            }
-        }
-    }
-
     public void piirraRuudukko() {
         for (int i = 0; i < ruudukko.getKoko(); i++) {
             for (int j = 0; j < ruudukko.getKoko(); j++) {
@@ -334,11 +309,19 @@ public class Kayttoliittyma implements Runnable {
     public Timer getTimer() {
         return this.timer;
     }
-
+    /**
+     * Asettaa ohjelman ottamaan värit käyttöön tai pois käytöstä riippuen parametrista.
+     * 
+     * @param varitPaalla true, jos värit halutaan käyttöön ja false, jos värit halutaan pois käytöstä
+     */
     public void varitPaalla(boolean varitPaalla) {
         this.varitPaalla = varitPaalla;
     }
-
+    /**
+     * Kertoo käyttääkö ohjelma tällä hetkellä värejä solujen piirtämisessä.
+     * 
+     * @return palauttaa true, jos värit ovat käytössä ja false, jos värit eivät ole käytössä
+     */
     public boolean getVaritPaalla() {
         return this.varitPaalla;
     }
