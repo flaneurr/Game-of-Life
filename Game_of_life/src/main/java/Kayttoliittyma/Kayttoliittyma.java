@@ -88,9 +88,9 @@ public class Kayttoliittyma implements Runnable {
 
     }
 
-    private JPanel luoSaantoValikko() {
+        private JPanel luoSaantoValikko() {
         JPanel panel = new JPanel();
-        GridLayout layout = new GridLayout(9, 2);
+        GridLayout layout = new GridLayout(10, 2);
         layout.setVgap(5);
         layout.setHgap(10);
         panel.setLayout(layout);
@@ -100,34 +100,37 @@ public class Kayttoliittyma implements Runnable {
         JTextArea selviamiset = new JTextArea("Solu selviää");
         selviamiset.setBackground(null);
         //napit
+        JCheckBox syntymaNappi0 = new JCheckBox("0");
         JCheckBox syntymaNappi1 = new JCheckBox("1");
         JCheckBox syntymaNappi2 = new JCheckBox("2");
-        JCheckBox syntymaNappi3 = new JCheckBox("3",true);
+        JCheckBox syntymaNappi3 = new JCheckBox("3", true);
         JCheckBox syntymaNappi4 = new JCheckBox("4");
         JCheckBox syntymaNappi5 = new JCheckBox("5");
         JCheckBox syntymaNappi6 = new JCheckBox("6");
         JCheckBox syntymaNappi7 = new JCheckBox("7");
         JCheckBox syntymaNappi8 = new JCheckBox("8");
 
+        JCheckBox selviamisNappi0 = new JCheckBox("0");
         JCheckBox selviamisNappi1 = new JCheckBox("1");
-        JCheckBox selviamisNappi2 = new JCheckBox("2",true);
-        JCheckBox selviamisNappi3 = new JCheckBox("3",true);
+        JCheckBox selviamisNappi2 = new JCheckBox("2", true);
+        JCheckBox selviamisNappi3 = new JCheckBox("3", true);
         JCheckBox selviamisNappi4 = new JCheckBox("4");
         JCheckBox selviamisNappi5 = new JCheckBox("5");
         JCheckBox selviamisNappi6 = new JCheckBox("6");
         JCheckBox selviamisNappi7 = new JCheckBox("7");
         JCheckBox selviamisNappi8 = new JCheckBox("8");
-        
-        // action listenerit
-        SyntymaNapinKuuntelija syntKuuntelija1 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(),1);
-        SyntymaNapinKuuntelija syntKuuntelija2 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(),2);
-        SyntymaNapinKuuntelija syntKuuntelija3 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(),3);
-        SyntymaNapinKuuntelija syntKuuntelija4 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(),4);
-        SyntymaNapinKuuntelija syntKuuntelija5 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(),5);
-        SyntymaNapinKuuntelija syntKuuntelija6 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(),6);
-        SyntymaNapinKuuntelija syntKuuntelija7 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(),7);
-        SyntymaNapinKuuntelija syntKuuntelija8 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(),8);
-        
+
+        SyntymaNapinKuuntelija syntKuuntelija0 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(), 0);
+        SyntymaNapinKuuntelija syntKuuntelija1 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(), 1);
+        SyntymaNapinKuuntelija syntKuuntelija2 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(), 2);
+        SyntymaNapinKuuntelija syntKuuntelija3 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(), 3);
+        SyntymaNapinKuuntelija syntKuuntelija4 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(), 4);
+        SyntymaNapinKuuntelija syntKuuntelija5 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(), 5);
+        SyntymaNapinKuuntelija syntKuuntelija6 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(), 6);
+        SyntymaNapinKuuntelija syntKuuntelija7 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(), 7);
+        SyntymaNapinKuuntelija syntKuuntelija8 = new SyntymaNapinKuuntelija(this.ruudukko.getSaanto(), 8);
+
+        syntymaNappi0.addItemListener(syntKuuntelija0);
         syntymaNappi1.addItemListener(syntKuuntelija1);
         syntymaNappi2.addItemListener(syntKuuntelija2);
         syntymaNappi3.addItemListener(syntKuuntelija3);
@@ -136,16 +139,18 @@ public class Kayttoliittyma implements Runnable {
         syntymaNappi6.addItemListener(syntKuuntelija6);
         syntymaNappi7.addItemListener(syntKuuntelija7);
         syntymaNappi8.addItemListener(syntKuuntelija8);
-        
-        SelviamisNapinKuuntelija selvKuuntelija1 = new SelviamisNapinKuuntelija(this.ruudukko.getSaanto(),1);
-        SelviamisNapinKuuntelija selvKuuntelija2 = new SelviamisNapinKuuntelija(this.ruudukko.getSaanto(),2);
-        SelviamisNapinKuuntelija selvKuuntelija3 = new SelviamisNapinKuuntelija(this.ruudukko.getSaanto(),3);
-        SelviamisNapinKuuntelija selvKuuntelija4 = new SelviamisNapinKuuntelija(this.ruudukko.getSaanto(),4);
-        SelviamisNapinKuuntelija selvKuuntelija5 = new SelviamisNapinKuuntelija(this.ruudukko.getSaanto(),5);
-        SelviamisNapinKuuntelija selvKuuntelija6 = new SelviamisNapinKuuntelija(this.ruudukko.getSaanto(),6);
-        SelviamisNapinKuuntelija selvKuuntelija7 = new SelviamisNapinKuuntelija(this.ruudukko.getSaanto(),7);
-        SelviamisNapinKuuntelija selvKuuntelija8 = new SelviamisNapinKuuntelija(this.ruudukko.getSaanto(),8);
-        
+
+        SelviamisNapinKuuntelija selvKuuntelija0 = new SelviamisNapinKuuntelija(this.ruudukko.getSaanto(), 0);
+        SelviamisNapinKuuntelija selvKuuntelija1 = new SelviamisNapinKuuntelija(this.ruudukko.getSaanto(), 1);
+        SelviamisNapinKuuntelija selvKuuntelija2 = new SelviamisNapinKuuntelija(this.ruudukko.getSaanto(), 2);
+        SelviamisNapinKuuntelija selvKuuntelija3 = new SelviamisNapinKuuntelija(this.ruudukko.getSaanto(), 3);
+        SelviamisNapinKuuntelija selvKuuntelija4 = new SelviamisNapinKuuntelija(this.ruudukko.getSaanto(), 4);
+        SelviamisNapinKuuntelija selvKuuntelija5 = new SelviamisNapinKuuntelija(this.ruudukko.getSaanto(), 5);
+        SelviamisNapinKuuntelija selvKuuntelija6 = new SelviamisNapinKuuntelija(this.ruudukko.getSaanto(), 6);
+        SelviamisNapinKuuntelija selvKuuntelija7 = new SelviamisNapinKuuntelija(this.ruudukko.getSaanto(), 7);
+        SelviamisNapinKuuntelija selvKuuntelija8 = new SelviamisNapinKuuntelija(this.ruudukko.getSaanto(), 8);
+
+        selviamisNappi0.addItemListener(selvKuuntelija0);
         selviamisNappi1.addItemListener(selvKuuntelija1);
         selviamisNappi2.addItemListener(selvKuuntelija2);
         selviamisNappi3.addItemListener(selvKuuntelija3);
@@ -158,28 +163,31 @@ public class Kayttoliittyma implements Runnable {
         // lisätään napit paneeliin
         panel.add(syntymat);
         panel.add(selviamiset);
+
+        panel.add(syntymaNappi0);
+        panel.add(selviamisNappi0);
         
         panel.add(syntymaNappi1);
         panel.add(selviamisNappi1);
-        
+
         panel.add(syntymaNappi2);
         panel.add(selviamisNappi2);
-        
+
         panel.add(syntymaNappi3);
         panel.add(selviamisNappi3);
-        
+
         panel.add(syntymaNappi4);
         panel.add(selviamisNappi4);
-        
+
         panel.add(syntymaNappi5);
         panel.add(selviamisNappi5);
-        
+
         panel.add(syntymaNappi6);
         panel.add(selviamisNappi6);
-        
+
         panel.add(syntymaNappi7);
         panel.add(selviamisNappi7);
-        
+
         panel.add(syntymaNappi8);
         panel.add(selviamisNappi8);
 
