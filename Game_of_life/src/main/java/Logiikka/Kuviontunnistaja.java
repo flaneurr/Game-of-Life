@@ -18,11 +18,11 @@ public class Kuviontunnistaja {
     public Kuviontunnistaja() {
         this.kuviot = new ArrayList<>();
         this.varit = new Color[5];
-        varit[0] = new Color(166, 19, 74);
-        varit[1] = new Color(86, 169, 113); 
-        varit[2] = new Color(0, 128, 128);
-        varit[3] = new Color(163, 73, 164);
-        varit[4] = new Color(64, 0, 128);
+        varit[0] = new Color(166, 19, 74); //  purppura
+        varit[1] = new Color(86, 169, 113); // mintunvihreä
+        varit[2] = new Color(0, 128, 128); // turkoosi
+        varit[3] = new Color(163, 73, 164); // lila
+        varit[4] = new Color(64, 0, 128); // tummansininen
     }
 
     /**
@@ -86,13 +86,13 @@ public class Kuviontunnistaja {
      * @return vari kuvio koon mukaan
      */
     public Color variKuvionKoonMukaan(Kuvio kuvio) {
-        if (kuvio.getKoko() < 2) {
+        if (kuvio.getKoko() == 1) {
             return this.varit[0];
-        } else if (kuvio.getKoko() < 3) {
+        } else if (kuvio.getKoko() == 2) {
             return this.varit[1];
-        } else if (kuvio.getKoko() < 5) {
+        } else if (kuvio.getKoko() == 3 || kuvio.getKoko() == 4) {
             return this.varit[2];
-        } else if (kuvio.getKoko() < 6) {
+        } else if (kuvio.getKoko() == 5) {
             return this.varit[3];
         } else {
             return this.varit[4];
@@ -119,24 +119,28 @@ public class Kuviontunnistaja {
             int y = solu.getY();
             // jokaiselle vierussolmulle, siis neljä tapausta: ylös, alas, vasen, oikea
             // ylös  
-            if (x - 1 >= 0 && solut[x - 1][y].getTila() && !kaytetyt.contains(solu)) {
+            if (x - 1 >= 0 && solut[x - 1][y].getTila() && !kaytetyt.contains(solut[x - 1][y])) {
                 jono.add(solut[x - 1][y]);
                 kuvio.lisaaSolu(solut[x - 1][y]);
+                kaytetyt.add(solut[x - 1][y]);
             }
             // alas
-            if (x + 1 < solut.length && solut[x + 1][y].getTila() && !kaytetyt.contains(solu)) { // <-- näissä ei olla otettu huomioon reunoja!!!!
+            if (x + 1 < solut.length && solut[x + 1][y].getTila() && !kaytetyt.contains(solut[x + 1][y])) { 
                 jono.add(solut[x + 1][y]);
                 kuvio.lisaaSolu(solut[x + 1][y]);
+                kaytetyt.add(solut[x + 1][y]);
             }
             // vasen
-            if (y - 1 >= 0 && solut[x][y - 1].getTila() && !kaytetyt.contains(solu)) {
+            if (y - 1 >= 0 && solut[x][y - 1].getTila() && !kaytetyt.contains(solut[x][y - 1])) {
                 jono.add(solut[x][y - 1]);
                 kuvio.lisaaSolu(solut[x][y - 1]);
+                kaytetyt.add(solut[x][y - 1]);
             }
             // oikea
-            if (y + 1 < solut[x].length && solut[x][y + 1].getTila() && !kaytetyt.contains(solu)) {
+            if (y + 1 < solut[x].length && solut[x][y + 1].getTila() && !kaytetyt.contains(solut[x][y + 1])) {
                 jono.add(solut[x][y + 1]);
                 kuvio.lisaaSolu(solut[x][y + 1]);
+                kaytetyt.add(solut[x][y + 1]);
             }
             kaytetyt.add(solu);
         }
