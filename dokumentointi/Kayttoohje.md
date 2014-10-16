@@ -1,4 +1,4 @@
-#####Käyttöohje
+###Käyttöohje
 
 Tämä ohjelma toteuttaa graafisesti John Conwayn Game of Life-pelin. Ohjelma koostuu soluja sisältävästä ruudukosta ja kahdesta valikosta pelin hallitsemiseksi. Jokaisella pelin solulla on jokin tila tietyllä aika-askeleella; solu on joko elossa tai kuollut. Solun tila kerrotaan sen värityksellä. Kuollut solu on valkoinen ja elossa oleva värillinen. Solun tila määräytyy sen elossa olevien naapurien lukumäärän mukaan. Klassisen Game of Lifen sääntöjen mukaan solu herää henkiin, jos sillä on tasan kolme elävää naapuria ja selviää hengissä jos eläviä naapureita on kaksi tai kolme. Jokaisella solulla on kahdeksan naapurisolua, jotka ovat solun ympärillä olevat lähimmät solut. Reunalla olevien solujen naapureiksi lasketaan vastakkaisen reunan solut, jolloin ruudukko muodostaa toruksen (donitsin muotoinen pinta). Peli etenee diskreetisti yksi aika-askel kerrallaan ja solujen tilat päivitetään yhtä aikaa.
 
