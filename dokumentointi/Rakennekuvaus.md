@@ -2,7 +2,7 @@
 
 Ohjelman logiikka koostuu viidestä luokasta. Ne voidaan jakaa karkeasti Game of Life-pelin säännöt toteuttaviin luokkiin ja solujen värityksestä vastaaviin luokkiin.
 
-Pelin säännöt ovat totetutettuna Ruudukko-, Saanto-, ja Solu-luokissa. Ruudukko sisältää Soluja ja hoitaa Solujen tilojen muutokset. Ruudukko sisältää metodit Solujen tilojen satunnaistamiselle, asettamiselle kuolleeksi ja päivittämiselle voimassa olevan päivitysssäännön mukaan. Ruudukko tarkistaa Solujen elossa olevien naapurien lukumäärän, kun solujen tilat päivitetään säännön mukaan. Ruudukko tuntee myös Saanto-luokan olion, jota hyödynnetään Solujen tilan päivityksessä.
+Pelin säännöt ovat totetutettuna Ruudukko-, Saanto- ja Solu-luokissa. Ruudukko sisältää Soluja ja hoitaa Solujen tilojen muutokset. Ruudukko sisältää metodit Solujen tilojen satunnaistamiselle, asettamiselle kuolleeksi ja päivittämiselle voimassa olevan päivitysssäännön mukaan. Ruudukko tarkistaa Solujen elossa olevien naapurien lukumäärän, kun solujen tilat päivitetään säännön mukaan. Ruudukko tuntee myös Saanto-luokan olion, jota hyödynnetään Solujen tilan päivityksessä.
 
 Solut ovat Game of Lifen alkeellisia rakennuspalikoita, jotak tietävät vain koordinaattinsa, tilansa ja värinsä. Solu-luokassa on metodit Solun tilan ja värin muuttamiseen.
 
