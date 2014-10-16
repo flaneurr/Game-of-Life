@@ -26,3 +26,6 @@
 
 #####22.9.14
 5 h. Graafisen käyttöliittymän aloitus. Tein Kuviontunnistajaan bfs-metodin loppuun.
+
+#####23.9.14 - 17.10.14
+Hyvin monta tuntia. Git hubin kanssa sattuneiden teknisten ongelmien takia tuntikirjanpidon pitäminen jäi heikoksi. Olen arviolta käyttänyt tällä aikavälillä n. 50 tuntia ohjelman tekemiseen. 
