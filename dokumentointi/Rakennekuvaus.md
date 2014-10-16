@@ -1,4 +1,4 @@
-#####Rakennekuvaus
+###Rakennekuvaus
 
 Ohjelman logiikka koostuu viidestä luokasta. Ne voidaan jakaa karkeasti Game of Life-pelin säännöt toteuttaviin luokkiin ja solujen värityksestä vastaaviin luokkiin.
 
