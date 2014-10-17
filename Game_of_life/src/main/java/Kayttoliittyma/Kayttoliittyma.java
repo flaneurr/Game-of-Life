@@ -96,7 +96,11 @@ public class Kayttoliittyma implements Runnable {
         container.add(saantoPaneeli);
 
     }
-
+        /**
+         * Luo valikon Game of lifen sääntöjen muuttamiseksi.
+         * 
+         * @return sääntöpaneeli
+         */
         private JPanel luoSaantoValikko() {
         JPanel panel = new JPanel();
         GridLayout layout = new GridLayout(10, 2);
