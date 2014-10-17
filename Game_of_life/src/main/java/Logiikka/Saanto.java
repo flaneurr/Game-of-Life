@@ -63,7 +63,7 @@ public class Saanto {
     /**
      * Lisää uuden kokonaisluvun syntyma-listaan.
      *
-     * @param uusi
+     * @param uusi listaan lisättävä luku
      */
     public void lisaaSyntyma(int uusi) {
         this.syntyma.add(uusi);
@@ -72,7 +72,7 @@ public class Saanto {
     /**
      * Lisää uuden kokonaisluvun selviaminen-listaan.
      *
-     * @param uusi
+     * @param uusi listaan lisättävä luku
      */
     public void lisaaSelviaminen(int uusi) {
         this.selviaminen.add(uusi);
@@ -113,8 +113,8 @@ public class Saanto {
     }
 
     /**
-     * Poistaa parametrina olevan elävien naapurien lukumäärän, jolla elävä solu selviää,
-     * jos luku löytyy syntyma-listalta.
+     * Poistaa parametrina olevan elävien naapurien lukumäärän, jolla elävä solu
+     * selviää, jos luku löytyy syntyma-listalta.
      *
      * @param selv
      */

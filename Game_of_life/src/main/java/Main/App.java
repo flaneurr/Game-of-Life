@@ -1,4 +1,4 @@
-package com.game_of_life.game_of_life;
+package Main;
 
 import Kayttoliittyma.Kayttoliittyma;
 import Logiikka.Ruudukko;

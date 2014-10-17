@@ -412,7 +412,7 @@ public class Ruudukko {
      *
      * @param edellinenRuudukko edellisen iteraation ruudukko
      * @param solu solu, jonka naapureiden lukumäärää lasketaan
-     * @return
+     * @return palauttaa elävien naapurien lukumäärän
      */
     public int elavienNaapurienLkm(Solu[][] edellinenRuudukko, Solu solu) {
         int lkm = +ylosElossa(edellinenRuudukko, solu) + alasElossa(edellinenRuudukko, solu) + vasenElossa(edellinenRuudukko, solu) + oikeaElossa(edellinenRuudukko, solu)
