@@ -8,7 +8,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 /**
- *
+ * Kuuntele solujen klikkauksia.
+ * 
  * @author Kisuli
  */
 public class SolunKuuntelija implements ActionListener{

@@ -5,6 +5,11 @@ import Logiikka.Ruudukko;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ *Kuuntelee ruudukon solujen tilat kuolleeksi asettavaa nappia. 
+ *
+ * @author crkaukin
+ */
 public class TyhjennysNapinKuuntelija implements ActionListener {
 
     private Ruudukko ruudukko;

@@ -5,6 +5,11 @@ import Logiikka.Ruudukko;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Kuuntelee pelin keskeyttävää solunappia.
+ *
+ * @author crkaukin
+ */
 public class LopetusNapinKuuntelija implements ActionListener {
 
     private Ruudukko ruudukko;

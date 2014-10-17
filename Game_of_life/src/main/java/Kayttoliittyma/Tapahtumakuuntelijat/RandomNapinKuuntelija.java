@@ -5,6 +5,11 @@ import Logiikka.Ruudukko;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Kuuntelee solunappia, joka satunnaistaa ruudukon solujen tilat.
+ *
+ * @author crkaukin
+ */
 public class RandomNapinKuuntelija implements ActionListener {
 
     private Ruudukko ruudukko;

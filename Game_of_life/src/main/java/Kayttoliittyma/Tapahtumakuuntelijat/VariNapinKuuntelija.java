@@ -10,7 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- *
+ * Kuuntelee valintanappia, joka määrää käytetäänkö ohjelmassa värejä.
+ * 
  * @author Kisuli
  */
 public class VariNapinKuuntelija implements ActionListener {

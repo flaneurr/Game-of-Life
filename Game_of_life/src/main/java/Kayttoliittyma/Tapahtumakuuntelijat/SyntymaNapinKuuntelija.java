@@ -5,7 +5,8 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 /**
- *
+ * Kuuntelee valintalaatikoita, jotka muuttavat solujen syntymissääntöjä.
+ * 
  * @author Kisuli
  */
 public class SyntymaNapinKuuntelija implements ItemListener {
@@ -22,8 +23,7 @@ public class SyntymaNapinKuuntelija implements ItemListener {
     public void itemStateChanged(ItemEvent e) {
        if (e.getStateChange() == ItemEvent.SELECTED){
            // lisätään ruudukkoon sääntö
-           saanto.lisaaSyntyma(naapurienLkm); // mistä tiedetään mikä luku poistetaan?
-           // pitäiskö tehä oma checkbox ja overridaa toString antamaan luku, joka on labelina
+           saanto.lisaaSyntyma(naapurienLkm); 
        } else {
            // poistetaan ruudukosta sääntö
            saanto.poistaSyntyma(naapurienLkm);

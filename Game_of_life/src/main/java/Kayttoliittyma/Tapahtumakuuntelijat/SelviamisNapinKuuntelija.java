@@ -5,7 +5,8 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 /**
- *
+ * Kuuntelee valintalaatikoita, jotka muuttavat solujen selviämissääntöjä.
+ * 
  * @author Kisuli
  */
 public class SelviamisNapinKuuntelija implements ItemListener {
@@ -22,7 +23,7 @@ public class SelviamisNapinKuuntelija implements ItemListener {
     public void itemStateChanged(ItemEvent e) {
         if (e.getStateChange() == ItemEvent.SELECTED){
            // lisätään ruudukkoon sääntö
-           saanto.lisaaSelviaminen(naapurienLkm); // mistä tiedetään mikä luku poistetaan?
+           saanto.lisaaSelviaminen(naapurienLkm); 
        } else {
            // poistetaan ruudukosta sääntö
            saanto.poistaSelviaminen(naapurienLkm);
