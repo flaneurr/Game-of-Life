@@ -27,6 +27,11 @@ import javax.swing.JTextArea;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
 
+/**
+ * Game of Life -ohjelman graafinen käyttöliittymä.
+ *
+ * @author crkaukin
+ */
 public class Kayttoliittyma implements Runnable {
 
     private JFrame frame;
@@ -61,6 +66,11 @@ public class Kayttoliittyma implements Runnable {
         frame.setVisible(true);
     }
 
+    /**
+     * Luo graafisen käyttöliittymän komponentit.
+     *
+     * @param container container-olio, joka sisältää ohjelman valikot
+     */
     public void luoKomponentit(Container container) {
         GridBagLayout gridLayout = new GridBagLayout();
         container.setLayout(gridLayout);
@@ -75,7 +85,7 @@ public class Kayttoliittyma implements Runnable {
         c.gridy = 0;
         container.add(valikkoPaneeli);
         //gridLayout.setConstraints(valikkoPaneeli, c);       
-        
+
         // luodaan ruudukko soluja
         JPanel ruudukkoPaneeli = luoRuudukko();
         GridBagConstraints d = new GridBagConstraints();
@@ -85,7 +95,7 @@ public class Kayttoliittyma implements Runnable {
         d.ipadx = 50;
         container.add(ruudukkoPaneeli);
         gridLayout.setConstraints(ruudukkoPaneeli, c);
-        
+
         // luodaan valikko, josta voidaan muokata sääntöjä
         JPanel saantoPaneeli = luoSaantoValikko();
         GridBagConstraints e = new GridBagConstraints();
@@ -96,12 +106,13 @@ public class Kayttoliittyma implements Runnable {
         container.add(saantoPaneeli);
 
     }
-        /**
-         * Luo valikon Game of lifen sääntöjen muuttamiseksi.
-         * 
-         * @return sääntöpaneeli
-         */
-        private JPanel luoSaantoValikko() {
+
+    /**
+     * Luo valikon Game of lifen sääntöjen muuttamiseksi.
+     *
+     * @return sääntöpaneeli
+     */
+    private JPanel luoSaantoValikko() {
         JPanel panel = new JPanel();
         GridLayout layout = new GridLayout(10, 2);
         layout.setVgap(5);
@@ -179,7 +190,7 @@ public class Kayttoliittyma implements Runnable {
 
         panel.add(syntymaNappi0);
         panel.add(selviamisNappi0);
-        
+
         panel.add(syntymaNappi1);
         panel.add(selviamisNappi1);
 
@@ -330,18 +341,23 @@ public class Kayttoliittyma implements Runnable {
     public Timer getTimer() {
         return this.timer;
     }
+
     /**
-     * Asettaa ohjelman ottamaan värit käyttöön tai pois käytöstä riippuen parametrista.
-     * 
-     * @param varitPaalla true, jos värit halutaan käyttöön ja false, jos värit halutaan pois käytöstä
+     * Asettaa ohjelman ottamaan värit käyttöön tai pois käytöstä riippuen
+     * parametrista.
+     *
+     * @param varitPaalla true, jos värit halutaan käyttöön ja false, jos värit
+     * halutaan pois käytöstä
      */
     public void varitPaalla(boolean varitPaalla) {
         this.varitPaalla = varitPaalla;
     }
+
     /**
      * Kertoo käyttääkö ohjelma tällä hetkellä värejä solujen piirtämisessä.
-     * 
-     * @return palauttaa true, jos värit ovat käytössä ja false, jos värit eivät ole käytössä
+     *
+     * @return palauttaa true, jos värit ovat käytössä ja false, jos värit eivät
+     * ole käytössä
      */
     public boolean getVaritPaalla() {
         return this.varitPaalla;
