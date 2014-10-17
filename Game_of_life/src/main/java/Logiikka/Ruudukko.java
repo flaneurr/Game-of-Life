@@ -11,10 +11,27 @@ import java.util.Random;
  */
 public class Ruudukko {
 
+    /**
+     * Lista Game of Lifen soluista.
+     */
     private Solu[][] solut;
+    /**
+     * Ruudukon käyttämä päivityssääntö.
+     */
     private Saanto saanto;
+    /**
+     * Ruudukon sivun pituus solujen lukumääränä. Ruudukko on aina neliön
+     * muotoinen ja sisältää soluja koko*koko kappaletta.
+     */
     private int koko;
+    /**
+     * Lista ruudukossa esiintyvistä kuvioista.
+     */
     private ArrayList<Kuvio> kuviot;
+    /**
+     * Ruudukon kuviontunnistaja.
+     *
+     */
     private Kuviontunnistaja kuviontunnistaja;
 
     /**
@@ -75,22 +92,36 @@ public class Ruudukko {
     }
 
     /**
-     * Päivittää solujen muodostamat kuviot ruudukolla.
+     * Päivittää solujen muodostamat kuviot.
      */
     public void paivitaKuviot() {
         this.kuviot = kuviontunnistaja.etsiKuviot(this.solut);
     }
+
     /**
-     * 
+     * Palauttaa ruudukon koon. Koko tarkoittaa tässä yhteydessä ruudukon sivun
+     * pituutta solujen lukumääränä.
      */
     public int getKoko() {
         return this.koko;
     }
 
+    /**
+     * Palauttaa ruudukon käyttämän solujen päivityssäännön.
+     *
+     * @return rudukon käyttämä solujen päivityssääntö
+     */
     public Saanto getSaanto() {
         return this.saanto;
     }
 
+    /**
+     * Palauttaa solun, joka on ruudukossa koordinaateissa (x,y).
+     *
+     * @param x solun x-koordinaatti
+     * @param y solun y-koordinaatti
+     * @return solu koordinaateissa (x,y)
+     */
     public Solu getSolu(int x, int y) {
         return this.solut[x][y];
     }
@@ -109,7 +140,7 @@ public class Ruudukko {
     }
 
     /**
-     * Asettaa kaikki ruudukon solu kuolleksi
+     * Asettaa kaikki ruudukon solut kuolleksi
      */
     public void tyhjennaRuudukko() {
         for (int i = 0; i < this.solut.length; i++) {
@@ -163,7 +194,7 @@ public class Ruudukko {
             }
         }
         // päivitetään kuviot ja annetaan soluille udet värit.
-        paivitaKuviot(); // <-aiheuttaa onglemia; peliä ei voi pelata eteenpäin kun tätä metodia kutsutaan
+        paivitaKuviot();
     }
 
     /**
@@ -262,7 +293,6 @@ public class Ruudukko {
      * @return palauttaa 1, jos vasemmanpuolinen ylänurkkanaapuri on elossa ja
      * 0, jos se on kuollut
      */
-    // toimii
     public int vasenYlaElossa(Solu[][] edellinenRuudukko, Solu solu) {
         int elossa = 0;
         if (solu.getX() == 0 && solu.getY() == 0) {
@@ -293,7 +323,6 @@ public class Ruudukko {
      * @return palauttaa 1, jos oikeaanpuolinen ylänurkkanaapuri on elossa ja 0,
      * jos se on kuollut
      */
-    // toimii!
     public int oikeaYlaElossa(Solu[][] edellinenRuudukko, Solu solu) {
         int elossa = 0;
         if (solu.getX() == 0 && solu.getY() == edellinenRuudukko[solu.getX()].length - 1) {
@@ -382,7 +411,7 @@ public class Ruudukko {
      * Laskee kuinka monta solun kahdeksasta naapurista on elossa.
      *
      * @param edellinenRuudukko edellisen iteraation ruudukko
-     * @param solu solu, jonka aapureiden lukumäärää lasketaan
+     * @param solu solu, jonka naapureiden lukumäärää lasketaan
      * @return
      */
     public int elavienNaapurienLkm(Solu[][] edellinenRuudukko, Solu solu) {
@@ -391,20 +420,12 @@ public class Ruudukko {
         return lkm;
     }
 
-    // yksinkertainen getteri Kuviontunnistajaa varten
+    /**
+     * Palauttaa ruudukon kuviontunnistajan.
+     *
+     * @return ruudukon kuviontunnistaja
+     */
     public Solu[][] getSolut() {
         return this.solut;
     }
-
-    public boolean kaikkiKuolleita() {
-        for (int i = 0; i < solut.length; i++) {
-            for (int j = 0; j < solut[i].length; j++) {
-                if (solut[i][j].getTila()) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
 }

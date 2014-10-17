@@ -6,6 +6,7 @@ import java.util.ArrayList;
 /**
  * Abstahoi Game of Life-pelissä esiintyvät yhtenäiset kuviot, jotka koostuvat vierekkäisistä elossa olevista soluista.
  * Luokka sisältää kuvioon kuuluvat solut ja oman värinsä.
+ * 
  * @author Kisuli
  */
 public class Kuvio {

@@ -1,5 +1,5 @@
 
-package Kayttoliittyma;
+package Kayttoliittyma.Tapahtumakuuntelijat;
 
 import Logiikka.Solu;
 import java.awt.Color;

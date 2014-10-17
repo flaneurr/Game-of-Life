@@ -12,9 +12,18 @@ import java.util.ArrayList;
  */
 public class Kuviontunnistaja {
 
+    /**
+     * Kuviontunnistajan löytämät kuviot listassa.
+     */
     private ArrayList<Kuvio> kuviot;
+    /**
+     * Taulukko värejä, joita kuviontunnistaja antaa luomilleen kuvioille.
+     */
     private Color[] varit;
 
+    /**
+     * Luo uuden kuviontunnistajan.
+     */
     public Kuviontunnistaja() {
         this.kuviot = new ArrayList<>();
         this.varit = new Color[5];
@@ -28,8 +37,8 @@ public class Kuviontunnistaja {
     /**
      * Asettaa kuviolle uuden värin.
      * 
-     * @param kuvio kuvio, jolle kerrotaan vari
-     * @param vari vari, joka välitetään kuviolle
+     * @param kuvio kuvio, jolle kerrotaan väri
+     * @param vari väri, joka välitetään kuviolle
      */
     public void kerroVariKuviolle(Kuvio kuvio, Color vari) {
         kuvio.setVari(vari);
@@ -46,7 +55,7 @@ public class Kuviontunnistaja {
 
     /**
      * Käy ruudukon läpi ja etsii sieltä kaikki yhtenäiset kuviot sekä värittää
-     * ne eri väreillä. Tässä samaan kuvioon kuuluu kaksi solua, jotka ovat
+     * kuviot. Tässä samaan kuvioon kuuluu kaksi solua, jotka ovat
      * toistensa horisontaalisia tai vertikaalisia naapureita (diagonaalilla
      * olevat naapurit ovat siis eri kuviota, elleivät liity toisiinsa toisen
      * solun kautta). Metodi tekee elävien solujen kohdalla leveyssuuntaisen
@@ -82,7 +91,7 @@ public class Kuviontunnistaja {
      * Metodi antaa kuviolle värin sen koon mukaan. Eri värit annetaan kuviolle,
      * joiden koko on 1, 2, 3 tai 4, 5 ja viittä suurempi.
      * 
-     * @param kuvio kuvio, jonka väri halutaan
+     * @param kuvio kuvio, jonka väri halutaan tietää
      * @return vari kuvio koon mukaan
      */
     public Color variKuvionKoonMukaan(Kuvio kuvio) {
@@ -101,11 +110,12 @@ public class Kuviontunnistaja {
 
     /**
      * Tekee leveyssuuntaisen haun lähtösolusta ja lisää kaikki sen viereiset
-     * elossa olevat solut samaan kuvioon
+     * elossa olevat solut samaan kuvioon. Viereisiksi soluiksi lasketaan horisontaaliset ja
+     * vertikaaliset naapurit.
      *
      * @param lahto lähtösolmu, josta leveyssuuntainen haku aloitetaan
      * @param kuvio kuvio, johon tällä hetkellä lisätään soluja
-     * @param solut ruudukon tuntema matriisi, jossa solut sijaitsevat
+     * @param solut ruudukon tuntema matriisi, jossa solut ovat
      * @param kaytetyt lista, jossa pidetään kirjaa läpikäydyistä soluista,
      * jottei sama solu olisi osa useampaa kuviota
      */
@@ -117,7 +127,7 @@ public class Kuviontunnistaja {
             Solu solu = jono.remove();
             int x = solu.getX();
             int y = solu.getY();
-            // jokaiselle vierussolmulle, siis neljä tapausta: ylös, alas, vasen, oikea
+            // tarkistetaan jokainen vierussolmu, siis neljä tapausta: ylös, alas, vasen, oikea
             // ylös  
             if (x - 1 >= 0 && solut[x - 1][y].getTila() && !kaytetyt.contains(solut[x - 1][y])) {
                 jono.add(solut[x - 1][y]);
